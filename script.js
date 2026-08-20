@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════
    AquaSol CEP — script.js
    Menu mobile · smooth scroll · scrollspy · reveals · contadores
-   · Disco de Newton · telemetria · simulador de aquecimento
+   · Disco de Newton · difração em CD · telemetria · simulador
    ═══════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
@@ -65,7 +65,14 @@
   });
 
   /* ── Scrollspy: destaque do link ativo ───────────────────── */
-  const spyMap = { inicio: 'inicio', tecnociencia: 'tecnociencia', robotica: 'robotica', simulador: 'simulador', equipe: 'equipe' };
+  const spyMap = {
+    inicio: 'inicio',
+    tecnociencia: 'tecnociencia',
+    robotica: 'robotica',
+    simulador: 'simulador',
+    acessibilidade: 'acessibilidade',
+    equipe: 'equipe'
+  };
   const spyLinks = new Map($$('.menu a').map((a) => [a.getAttribute('href').slice(1), a]));
   const spy = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
@@ -145,6 +152,21 @@
       discCap.textContent = spinning
         ? 'Girando rápido: as cores se somam e percebemos o branco — a prova de Newton!'
         : 'Em repouso, vemos 7 cores distintas.';
+    });
+  }
+
+  /* ── Demonstração: difração em rede de CD ─────────────────── */
+  const cdLab = $('#cdLab');
+  const cdBtn = $('#cdBtn');
+  const cdCap = $('#cdCaption');
+  if (cdLab && cdBtn) {
+    cdBtn.addEventListener('click', () => {
+      const on = cdLab.classList.toggle('diffracting');
+      cdBtn.textContent = on ? '◑ Desativar difração' : '◐ Ativar difração';
+      cdBtn.setAttribute('aria-pressed', String(on));
+      cdCap.textContent = on
+        ? 'Cores separadas por difração: o vermelho (maior λ) desvia mais que o violeta — o oposto do prisma.'
+        : 'Luz branca incide sobre as trilhas do CD.';
     });
   }
 
