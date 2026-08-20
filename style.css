@@ -11,6 +11,7 @@
   --ink-3:    #10324A;   /* bordas/cards escuros */
   --paper:    #F0F5F4;   /* fundo claro */
   --paper-2:  #FFFFFF;
+  --pool:     #E6F1EF;   /* fundo da seção acessibilidade */
   --aqua:     #56E1D4;
   --aqua-dp:  #157A8C;
   --solar:    #FFB531;
@@ -51,7 +52,8 @@ button{font:inherit;cursor:pointer}
 
 /* Foco visível forte (A11y) */
 :focus-visible{outline:3px solid var(--solar);outline-offset:3px;border-radius:4px}
-.section--paper :focus-visible{outline-color:var(--aqua-dp)}
+.section--paper :focus-visible,
+.section--pool :focus-visible{outline-color:var(--aqua-dp)}
 
 /* Grão sutil sobre tudo */
 .noise{
@@ -97,7 +99,8 @@ button{font:inherit;cursor:pointer}
 .btn--primary:hover{box-shadow:0 10px 26px rgba(242,137,27,.45)}
 .btn--primary[aria-pressed="true"]{background:linear-gradient(135deg,#2A6F7F,#174C5C);color:#EAFBFF}
 .btn--ghost{border-color:var(--aqua);color:var(--txt-l)}
-.section--paper .btn--ghost{border-color:var(--aqua-dp);color:var(--txt-d)}
+.section--paper .btn--ghost,
+.section--pool .btn--ghost{border-color:var(--aqua-dp);color:var(--txt-d)}
 .btn--dark{background:var(--ink-2);color:var(--txt-l);border-color:var(--line-d)}
 .btn--small{padding:.55rem 1.1rem;font-size:.92rem}
 .btn--xl{padding:1.05rem 2rem;font-size:1.1rem;width:100%;justify-content:center}
@@ -236,6 +239,7 @@ body.loaded .line > span{transform:none}
 .section{padding:4.5rem 0 5rem}
 .section--paper{background:var(--paper)}
 .section--ink{background:var(--ink);color:var(--txt-l)}
+.section--pool{background:var(--pool)}
 
 .sec-head{max-width:760px;margin-bottom:3rem}
 .kicker{
@@ -278,7 +282,7 @@ body.loaded .line > span{transform:none}
 }
 .spectrum-card figcaption{font-size:.9rem;color:var(--mut-d);margin-top:1.6rem}
 
-.disc-card h3,.pin-card h3{font-family:var(--f-display);font-size:1.1rem;margin-bottom:1rem}
+.disc-card h3,.pin-card h3,.cd-card h3{font-family:var(--f-display);font-size:1.1rem;margin-bottom:1rem}
 .disc-wrap{display:flex;justify-content:center;margin-bottom:1rem}
 .newton-disc{
   width:150px;height:150px;border-radius:50%;
@@ -296,7 +300,45 @@ body.loaded .line > span{transform:none}
 .pinhole{width:100%;height:auto;margin-bottom:.8rem;border-radius:8px}
 .pin-card p{font-size:.92rem;color:var(--mut-d)}
 
-/* Tríade de princípios */
+/* Demonstração: rede de difração (CD) */
+.cd-card .btn{width:100%;justify-content:center}
+.cd-lab{
+  position:relative;height:190px;border-radius:10px;overflow:hidden;
+  background:linear-gradient(160deg,#04101A,#0A2233);margin-bottom:1rem;
+}
+.cd-lab__beam{
+  position:absolute;top:50%;left:0;width:36%;height:3px;
+  background:linear-gradient(90deg,rgba(243,247,246,0),#F3F7F6);
+  transform:translateY(-50%);
+}
+.cd-lab__disc{
+  position:absolute;top:50%;left:36%;width:62px;height:62px;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:conic-gradient(from 25deg,#D7DEE4,#93A3B1,#EDF2F5,#AEBBC6,#D7DEE4);
+  border:3px solid #0E2A3C;box-shadow:0 0 20px rgba(86,225,212,.3);
+}
+.cd-lab__disc::after{
+  content:"";position:absolute;inset:0;margin:auto;width:14px;height:14px;
+  border-radius:50%;background:#0A2233;
+}
+.cd-lab__rays{position:absolute;inset:0}
+.cd-lab__rays i{
+  position:absolute;top:calc(50% - 1.5px);left:36%;width:60%;height:3px;border-radius:2px;
+  transform-origin:left center;transform:rotate(0deg);opacity:0;
+  transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .45s ease;
+  transition-delay:calc(var(--i)*.07s);
+}
+/* Ordem espectral: na rede de difração, o vermelho (maior λ) desvia mais */
+.cd-lab__rays i:nth-child(1){background:#7A2FF2;--ang:-8deg; --i:0}
+.cd-lab__rays i:nth-child(2){background:#2F6BFF;--ang:-15deg;--i:1}
+.cd-lab__rays i:nth-child(3){background:#2FD4B7;--ang:-22deg;--i:2}
+.cd-lab__rays i:nth-child(4){background:#FFD400;--ang:-29deg;--i:3}
+.cd-lab__rays i:nth-child(5){background:#FF8A00;--ang:-36deg;--i:4}
+.cd-lab__rays i:nth-child(6){background:#FF3D2E;--ang:-43deg;--i:5}
+.cd-lab.diffracting .cd-lab__rays i{transform:rotate(var(--ang));opacity:.95}
+.cd-lab.diffracting .cd-lab__disc{box-shadow:0 0 26px rgba(255,181,49,.4)}
+
+/* Princípios */
 .principles{display:grid;gap:1.2rem}
 .principle{
   background:var(--paper-2);border:1px solid var(--line-l);border-left:6px solid var(--aqua);
@@ -304,6 +346,7 @@ body.loaded .line > span{transform:none}
 }
 .principle:nth-child(2){border-left-color:var(--solar)}
 .principle:nth-child(3){border-left-color:var(--hot)}
+.principle:nth-child(4){border-left-color:#7A2FF2}
 .principle:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(16,48,63,.12)}
 .principle__icon{font-size:1.6rem;display:block;margin-bottom:.6rem}
 .principle h3{font-family:var(--f-display);font-size:1.12rem;margin-bottom:.5rem}
@@ -494,9 +537,26 @@ body.loaded .line > span{transform:none}
 
 .sim-caption{font-size:.78rem;color:var(--mut-d);margin-top:1rem;text-align:center}
 
+/* ── Acessibilidade na piscina ────────────────────────────── */
+.acc-grid{display:grid;gap:2.2rem}
+.acc-fig img{border-radius:var(--radius);border:1px solid var(--line-l)}
+.acc-cards{display:grid;gap:1.1rem}
+.acc-card{
+  background:#fff;border:1px solid var(--line-l);border-top:5px solid var(--aqua-dp);
+  border-radius:var(--radius);padding:1.4rem;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.acc-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(16,48,63,.12)}
+.acc-card:nth-child(2){border-top-color:var(--solar)}
+.acc-card:nth-child(3){border-top-color:var(--hot)}
+.acc-card:nth-child(4){border-top-color:#7A2FF2}
+.acc-card h3{font-family:var(--f-display);font-size:1.08rem;margin-bottom:.5rem}
+.acc-card p{font-size:.95rem;color:var(--mut-d)}
+.acc-card p strong{color:var(--txt-d)}
+
 /* ── Rodapé ───────────────────────────────────────────────── */
 .footer{background:var(--ink-2);color:var(--txt-l);padding-bottom:2.5rem}
-.wave-div--footer{background:var(--paper)}
+.wave-div--footer{background:var(--pool)}
 
 .team{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.2rem;margin-bottom:3rem}
 .team__card{
@@ -536,10 +596,11 @@ body.loaded .line > span{transform:none}
 
 /* ── Responsivo (mobile-first) ────────────────────────────── */
 @media (min-width: 720px){
-  .principles{grid-template-columns:repeat(3,1fr)}
+  .principles{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
   .stats{grid-template-columns:repeat(4,1fr)}
   .footer__sus{grid-template-columns:1.4fr 1fr}
   .sim-grid{grid-template-columns:1fr 1.15fr;align-items:start}
+  .acc-cards{grid-template-columns:1fr 1fr}
 }
 
 @media (min-width: 900px){
@@ -547,6 +608,7 @@ body.loaded .line > span{transform:none}
   .tec-grid{grid-template-columns:1.15fr .85fr;gap:3rem}
   .rob-grid{grid-template-columns:380px 1fr;gap:3rem}
   .rob-sticky{position:sticky;top:calc(var(--nav-h) + 24px);align-self:start}
+  .acc-grid{grid-template-columns:.85fr 1.15fr;align-items:start}
 }
 
 @media (min-width: 920px){
