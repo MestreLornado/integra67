@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AquaSol CEP — Aquecimento Solar e Automação da Piscina Térmica</title>
-  <meta name="description" content="Projeto Integrador do CEP: solução conceitual de automação e aquecimento sustentável para a piscina térmica, unindo óptica, energia solar e robótica.">
+  <meta name="description" content="Projeto Integrador do CEP: solução conceitual de automação e aquecimento sustentável para a piscina térmica, unindo óptica, energia solar, robótica e acessibilidade.">
   <meta name="theme-color" content="#05131D">
 
   <!-- Fontes: Display (Space Grotesk) + Corpo legível (IBM Plex Sans) + Dados (IBM Plex Mono) -->
@@ -47,6 +47,7 @@
           <li><a href="#tecnociencia">Tecnociência &amp; Óptica</a></li>
           <li><a href="#robotica">Robótica &amp; Programação</a></li>
           <li><a href="#simulador">Simulador</a></li>
+          <li><a href="#acessibilidade">Acessibilidade</a></li>
           <li><a href="#equipe">Equipe</a></li>
         </ul>
       </nav>
@@ -72,7 +73,8 @@
             O <strong>AquaSol</strong> é uma solução conceitual de aquecimento sustentável e
             automação para a <strong>piscina térmica do CEP</strong>: coletores solares transformam
             radiação em energia térmica, enquanto sensores e programação mantêm a água na
-            temperatura ideal — com conforto, segurança e <strong>zero custo elétrico de aquecimento</strong>.
+            temperatura ideal — com conforto, segurança, acessibilidade e
+            <strong>zero custo elétrico de aquecimento</strong>.
           </p>
 
           <div class="hero__cta">
@@ -168,8 +170,8 @@
       <!-- Letreiro contínuo -->
       <div class="marquee" aria-hidden="true">
         <div class="marquee__track">
-          <span>Óptica ✦ Absorção ✦ Disco de Newton ✦ Câmara Escura ✦ Coletores Solares ✦ Arduino ✦ Sensores ✦ Atuadores ✦ Energia Limpa ✦ ODS 7 e 13 ✦ Conforto Térmico ✦ Impacto Social ✦&nbsp;</span>
-          <span>Óptica ✦ Absorção ✦ Disco de Newton ✦ Câmara Escura ✦ Coletores Solares ✦ Arduino ✦ Sensores ✦ Atuadores ✦ Energia Limpa ✦ ODS 7 e 13 ✦ Conforto Térmico ✦ Impacto Social ✦&nbsp;</span>
+          <span>Óptica ✦ Absorção ✦ Dispersão ✦ Difração ✦ Disco de Newton ✦ Câmara Escura ✦ Coletores Solares ✦ Arduino ✦ Sensores ✦ Atuadores ✦ Energia Limpa ✦ ODS 7 e 13 ✦ Acessibilidade ✦&nbsp;</span>
+          <span>Óptica ✦ Absorção ✦ Dispersão ✦ Difração ✦ Disco de Newton ✦ Câmara Escura ✦ Coletores Solares ✦ Arduino ✦ Sensores ✦ Atuadores ✦ Energia Limpa ✦ ODS 7 e 13 ✦ Acessibilidade ✦&nbsp;</span>
         </div>
       </div>
     </section>
@@ -236,8 +238,30 @@
               máximo de radiação possível. Luz em linha reta, placa certa, calor garantido.
             </p>
 
+            <h3>Dispersão por difração: o arco-íris escondido no CD</h3>
+            <p>
+              Existem dois caminhos físicos para separar a luz branca em cores. No prisma de Newton, a
+              <strong>dispersão ocorre por refração</strong>: o índice de refração do vidro varia com o
+              comprimento de onda, então o violeta “freia” e desvia mais que o vermelho. Mas há um segundo
+              caminho, tão elegante quanto: a <strong>difração</strong>. Quando a luz encontra fendas
+              comparáveis ao seu comprimento de onda, ela se espalha; se as fendas forem muitas e
+              regularmente espaçadas — uma <strong>rede de difração</strong> — as ondas espalhadas interferem
+              entre si e produzem franjas brilhantes em ângulos que dependem de λ, segundo a equação
+              <strong>d · sen θ = m · λ</strong>. Quanto maior o comprimento de onda, maior o ângulo: aqui é o
+              <strong>vermelho que desvia mais</strong> — exatamente o oposto do prisma.
+            </p>
+            <p>
+              Um CD é uma rede de difração de reflexão: suas trilhas, separadas por cerca de 1,6 µm,
+              decompõem a luz naqueles reflexos arco-íris. No projeto, usamos um
+              <strong>espectroscópio caseiro de CD</strong> para decompor a luz do sol e comprovar
+              experimentalmente aquilo que o coletor já “sabia”: a radiação solar contém
+              <strong>todas as cores do espectro visível</strong> (e também infravermelho). É por isso que a
+              placa preta funciona tão bem — há energia em todas as faixas para ser absorvida. Difração e
+              dispersão são, assim, as ferramentas que nos permitem <em>enxergar</em> o combustível do AquaSol.
+            </p>
+
             <figure class="fig">
-              <img src="https://www.soletrol.com.br/produtos/coletores-solares/aquecedor-solar-linha-max/imagens/coletor-solar-soletrol-max-02.jpg" width="900" height="620" loading="lazy"
+              <img src="https://picsum.photos/seed/coletor-solar-piscina/900/620" width="900" height="620" loading="lazy"
                    alt="Fotografia ilustrativa de um coletor solar plano instalado sobre uma estrutura metálica, com tubulações conduzindo água até uma piscina ao fundo.">
               <figcaption>Coletor solar plano: a superfície escura maximiza a absorção de radiação. <span class="mono">(imagem ilustrativa)</span></figcaption>
             </figure>
@@ -280,10 +304,24 @@
               <p>Assim como a luz atravessa o orifício e projeta uma imagem, a radiação solar
               atravessa o vidro do coletor em linha reta até a placa absorvedora.</p>
             </div>
+
+            <!-- Rede de difração: demonstração interativa -->
+            <div class="cd-card reveal" style="--d:.2s">
+              <h3>Experimente: difração em um CD</h3>
+              <div class="cd-lab" id="cdLab" aria-hidden="true">
+                <span class="cd-lab__beam"></span>
+                <span class="cd-lab__disc"></span>
+                <span class="cd-lab__rays">
+                  <i></i><i></i><i></i><i></i><i></i><i></i>
+                </span>
+              </div>
+              <button class="btn btn--small btn--dark" id="cdBtn" type="button" aria-pressed="false">◐ Ativar difração</button>
+              <p class="disc-cap mono" id="cdCaption" aria-live="polite">Luz branca incide sobre as trilhas do CD.</p>
+            </div>
           </aside>
         </div>
 
-        <!-- Tríade de princípios -->
+        <!-- Princípios ópticos -->
         <div class="principles">
           <article class="principle reveal">
             <span class="principle__icon" aria-hidden="true">🌡️</span>
@@ -302,6 +340,13 @@
             <h3>Propagação retilínea</h3>
             <p>A câmara escura prova que a luz viaja em linha reta. Por isso <strong>inclinação e orientação</strong>
             dos painéis são calculadas para interceptar o trajeto dos raios solares.</p>
+          </article>
+          <article class="principle reveal" style="--d:.36s">
+            <span class="principle__icon" aria-hidden="true">📀</span>
+            <h3>Difração também dispersa</h3>
+            <p>Redes de difração (como as trilhas de um CD) separam cores por interferência:
+            <strong>d · sen θ = m · λ</strong>. O vermelho, com maior λ, desvia mais — e foi assim que
+            montamos nosso espectroscópio solar caseiro.</p>
           </article>
         </div>
       </div>
@@ -385,7 +430,7 @@
                 <pre class="code mono" tabindex="0" aria-label="Pseudocódigo da lógica de controle do sistema"><code>// laço principal — a cada 5 segundos
 agua   ← ler( sensor_temperatura )
 luz    ← ler( LDR )
-painel ← ler( sensor_coleto r )
+painel ← ler( sensor_coletor )
 
 SE agua < 28.0  E  luz > 400  E  painel > agua + 2 ENTÃO
       acionar RELE_BOMBA        // água circula e aquece
@@ -428,7 +473,7 @@ SENÃO SE agua ≥ 32.0  OU  painel ≤ agua ENTÃO
             </article>
 
             <figure class="fig reveal" style="--d:.05s">
-              <img src="https://lh3.googleusercontent.com/gg-dl/AAQ_wbE4jDSfykwxJQtzkSJDpzcmQTl_jCwoDWREyI9uqppGaeF6RjW8n9JCEgALBf5XrFRLHd6nHDUr83R6dQ7KCTngCmOJG5UpD2sN4i5VCtRppFoBIF2wT21WVikDqOB9H1SaUV1YH1d7rOYiJt4zYt2OocfxiKQtXPYlV4C3UaVaQhIi=s1024-rj" width="900" height="560" loading="lazy"
+              <img src="https://picsum.photos/seed/arduino-sensores-robotica/900/560" width="900" height="560" loading="lazy"
                    alt="Bancada de prototipagem com placa microcontroladora, jumpers coloridos, sensor de temperatura e módulo relé montados em uma protoboard.">
               <figcaption>Bancada de prototipagem: microcontrolador, sensor de temperatura e relé. <span class="mono">(imagem ilustrativa)</span></figcaption>
             </figure>
@@ -516,6 +561,66 @@ SENÃO SE agua ≥ 32.0  OU  painel ≤ agua ENTÃO
       </div>
     </section>
 
+    <!-- Onda para a acessibilidade -->
+    <div class="wave-div" style="background:var(--paper)" aria-hidden="true">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0 44 C 200 12 400 70 620 40 C 840 10 1020 66 1240 38 C 1340 26 1400 38 1440 34 L1440 80 L0 80 Z" fill="#E6F1EF"/></svg>
+    </div>
+
+    <!-- ══════════════════════ ACESSIBILIDADE NA PISCINA ══════════════════════ -->
+    <section class="section section--pool" id="acessibilidade" aria-labelledby="accTitle">
+      <div class="container">
+
+        <header class="sec-head reveal">
+          <p class="kicker mono">04 · ACESSIBILIDADE NA PISCINA TÉRMICA</p>
+          <h2 id="accTitle"><span class="uline">Uma piscina para todos</span> os corpos e olhares</h2>
+          <p class="sec-head__lead">
+            Aquecer de forma sustentável só faz sentido se a piscina for de fato acessível. O AquaSol
+            considera o acesso físico e o acesso sensorial — e a óptica que estudamos orienta a
+            sinalização visual inclusiva.
+          </p>
+        </header>
+
+        <div class="acc-grid">
+          <figure class="fig acc-fig reveal">
+            <img src="https://picsum.photos/seed/piscina-acessivel/860/720" width="860" height="720" loading="lazy"
+                 alt="Fotografia ilustrativa de uma piscina térmica com rampa de acesso submersa, barras de apoio laterais e piso antiderrapante ao redor.">
+            <figcaption>Acesso submerso gradual e barras de apoio garantem autonomia na entrada da água. <span class="mono">(imagem ilustrativa)</span></figcaption>
+          </figure>
+
+          <div class="acc-cards">
+            <article class="acc-card reveal">
+              <h3>🏊 Acesso físico com autonomia</h3>
+              <p>Escada submersa com corrimão duplo, barras de apoio, piso antiderrapante e cadeira de
+              transferência permitem que pessoas com deficiência física ou mobilidade reduzida entrem
+              na água com segurança e independência.</p>
+            </article>
+
+            <article class="acc-card reveal" style="--d:.08s">
+              <h3>🌡️ Conforto térmico é saúde</h3>
+              <p>Para hidroterapia e reabilitação, a constância entre <strong>28 e 32 °C</strong> é
+              requisito terapêutico, não luxo. A automação mantém a faixa ideal continuamente —
+              inclusive para pessoas com sensibilidade térmica reduzida.</p>
+            </article>
+
+            <article class="acc-card reveal" style="--d:.16s">
+              <h3>🎨 Sinalização guiada pela óptica</h3>
+              <p>Ao estudar dispersão — no prisma, no Disco de Newton e na difração do CD — entendemos
+              que cor é percepção. Por isso a sinalização usa <strong>contraste de luminosidade</strong>,
+              e não apenas matiz: legível para baixa visão e daltonismo. Superfícies foscas trocam a
+              reflexão especular pela difusa, eliminando o ofuscamento.</p>
+            </article>
+
+            <article class="acc-card reveal" style="--d:.24s">
+              <h3>♿ Comunicação acessível</h3>
+              <p>Este próprio site aplica os princípios: HTML semântico, contraste de cores em nível AA,
+              textos alternativos descritivos, navegação por teclado e respeito à preferência de
+              movimento reduzido do usuário.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ══════════════════════ RODAPÉ / EQUIPE ══════════════════════ -->
@@ -527,31 +632,31 @@ SENÃO SE agua ≥ 32.0  OU  painel ≤ agua ENTÃO
     <div class="container">
 
       <header class="sec-head reveal">
-        <p class="kicker kicker--solar mono">04 · EQUIPE &amp; SUSTENTABILIDADE</p>
+        <p class="kicker kicker--solar mono">05 · EQUIPE &amp; SUSTENTABILIDADE</p>
         <h2 id="teamTitle"><span class="uline uline--solar">Quem constrói o AquaSol</span></h2>
       </header>
 
       <!-- ✏️ SUBSTITUA pelos nomes reais da equipe -->
       <ul class="team">
         <li class="team__card reveal">
-          <img src="https://lh3.googleusercontent.com/a/ACg8ocIVpaa29wEBlgYEHjx4s0Fe1eYtbv00O1bmrdUF2m7DS3jwmFRX=s83-c-mo" width="80" height="80" loading="lazy" alt="Retrato ilustrativo da integrante responsável pela pesquisa em óptica.">
-          <h3>Leonardo M.</h3><p>Pesquisa em Óptica &amp; Coletores</p>
+          <img src="https://picsum.photos/seed/integrante-optica/200/200" width="80" height="80" loading="lazy" alt="Retrato ilustrativo da integrante responsável pela pesquisa em óptica.">
+          <h3>Nome da Pessoa</h3><p>Pesquisa em Óptica &amp; Coletores</p>
         </li>
         <li class="team__card reveal" style="--d:.08s">
-          <img src="https://lh3.googleusercontent.com/a/ACg8ocIVpaa29wEBlgYEHjx4s0Fe1eYtbv00O1bmrdUF2m7DS3jwmFRX=s83-c-mo" width="80" height="80" loading="lazy" alt="Retrato ilustrativo do integrante responsável pela robótica e sensores.">
-          <h3>Leonardo P.</h3><p>Robótica &amp; Sensores</p>
+          <img src="https://picsum.photos/seed/integrante-robotica/200/200" width="80" height="80" loading="lazy" alt="Retrato ilustrativo do integrante responsável pela robótica e sensores.">
+          <h3>Nome da Pessoa</h3><p>Robótica &amp; Sensores</p>
         </li>
         <li class="team__card reveal" style="--d:.16s">
-          <img src="https://lh3.googleusercontent.com/a/ACg8ocIVpaa29wEBlgYEHjx4s0Fe1eYtbv00O1bmrdUF2m7DS3jwmFRX=s83-c-mo" width="80" height="80" loading="lazy" alt="Retrato ilustrativo do integrante responsável pelo desenvolvimento do site e simulador.">
-          <h3>Leonardo M. P.</h3><p>Desenvolvimento &amp; Simulador</p>
+          <img src="https://picsum.photos/seed/integrante-dev/200/200" width="80" height="80" loading="lazy" alt="Retrato ilustrativo do integrante responsável pelo desenvolvimento do site e simulador.">
+          <h3>Nome da Pessoa</h3><p>Desenvolvimento &amp; Simulador</p>
         </li>
         <li class="team__card reveal" style="--d:.24s">
-          <img src="https://lh3.googleusercontent.com/a/ACg8ocIVpaa29wEBlgYEHjx4s0Fe1eYtbv00O1bmrdUF2m7DS3jwmFRX=s83-c-mo" width="80" height="80" loading="lazy" alt="Retrato ilustrativa da integrante responsável pela documentação e design.">
-          <h3>Pauli. M.</h3><p>Documentação &amp; Design</p>
+          <img src="https://picsum.photos/seed/integrante-design/200/200" width="80" height="80" loading="lazy" alt="Retrato ilustrativo da integrante responsável pela documentação e design.">
+          <h3>Nome da Pessoa</h3><p>Documentação &amp; Design</p>
         </li>
         <li class="team__card team__card--advisor reveal" style="--d:.32s">
-          <img src="https://lh3.googleusercontent.com/a-/ALV-UjWuCmnsz-7tiI6Zqg2kOq2RqpijuGTOkA6N1y_eftQtmLrIL_E=s75-c" width="80" height="80" loading="lazy" alt="Retrato ilustrativo do professor ou professora orientadora do projeto.">
-          <h3>Professor Angelo - Robótica </h3><p>Orientação do Projeto</p>
+          <img src="https://picsum.photos/seed/professor-orientador/200/200" width="80" height="80" loading="lazy" alt="Retrato ilustrativo do professor ou professora orientadora do projeto.">
+          <h3>Prof.ª Nome da Orientação</h3><p>Orientação do Projeto</p>
         </li>
       </ul>
 
@@ -562,7 +667,7 @@ SENÃO SE agua ≥ 32.0  OU  painel ≤ agua ENTÃO
             O AquaSol dialoga diretamente com a <strong>Agenda 2030 da ONU</strong>: ao substituir o
             aquecimento elétrico por energia solar e automatizar o consumo, o projeto reduz custos
             operacionais, emissões de carbono e amplia o acesso da comunidade escolar a uma piscina
-            aquecida e segura — tecnologia com propósito social.
+            aquecida, acessível e segura — tecnologia com propósito social.
           </p>
         </div>
         <ul class="sdg" aria-label="Objetivos de Desenvolvimento Sustentável relacionados ao projeto">
@@ -576,6 +681,7 @@ SENÃO SE agua ≥ 32.0  OU  painel ≤ agua ENTÃO
         <a href="#tecnociencia">Tecnociência</a>
         <a href="#robotica">Robótica</a>
         <a href="#simulador">Simulador</a>
+        <a href="#acessibilidade">Acessibilidade</a>
         <a href="#topo" id="backTop">↑ Voltar ao topo</a>
       </nav>
 
