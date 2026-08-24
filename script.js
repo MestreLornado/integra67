@@ -1,7 +1,8 @@
 /* ═══════════════════════════════════════════════════════════
    AquaSol CEP — script.js
-   Menu mobile · smooth scroll · scrollspy · reveals · contadores
-   · Disco de Newton · difração em CD · telemetria · simulador
+   Tema claro/noturno · Menu mobile · smooth scroll · scrollspy
+   · reveals · contadores · Disco de Newton · difração em CD
+   · telemetria · simulador de aquecimento
    ═══════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
@@ -15,6 +16,32 @@
   /* ── Ano corrente + carregamento ─────────────────────────── */
   $('#year').textContent = new Date().getFullYear();
   window.addEventListener('load', () => document.body.classList.add('loaded'));
+
+  /* ── Tema: modo claro / modo noturno ─────────────────────── */
+  const rootEl = document.documentElement;
+  const themeToggle = $('#themeToggle');
+
+  function applyTheme(theme) {
+    rootEl.setAttribute('data-theme', theme);
+    if (!themeToggle) return;
+    const dark = theme === 'dark';
+    themeToggle.setAttribute('aria-pressed', String(dark));
+    const icon = themeToggle.querySelector('.theme-toggle__icon');
+    const txt  = themeToggle.querySelector('.theme-toggle__txt');
+    if (icon) icon.textContent = dark ? '☀️' : '🌙';
+    if (txt)  txt.textContent  = dark ? 'Modo claro' : 'Modo noturno';
+  }
+
+  // O tema inicial já foi aplicado pelo script inline no <head>
+  applyTheme(rootEl.getAttribute('data-theme') || 'light');
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const next = rootEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      try { localStorage.setItem('aquasol-theme', next); } catch (e) { /* modo privado */ }
+    });
+  }
 
   /* ── Cabeçalho: sombra + barra de progresso ──────────────── */
   const topbar = $('#topbar');
@@ -58,7 +85,6 @@
       target.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' });
       setMenu(false);
       history.pushState(null, '', link.getAttribute('href'));
-      // Move o foco para o destino (acessibilidade de teclado)
       target.setAttribute('tabindex', '-1');
       target.focus({ preventScroll: true });
     });
@@ -136,7 +162,7 @@
   const discCap = $('#discCaption');
   if (disc && discBtn) {
     discBtn.addEventListener('click', () => {
-      if (reduced()) { // sem animação: mostra o resultado conceitual
+      if (reduced()) {
         const merged = disc.classList.toggle('spinning');
         disc.style.filter = merged ? 'blur(1.5px) saturate(.6) brightness(1.25)' : '';
         discBtn.textContent = merged ? '■ Parar o disco' : '▶ Girar o disco';
@@ -185,8 +211,6 @@
 
   /* ═══════════════════════════════════════════════════════════
      SIMULADOR DE AQUECIMENTO SOLAR
-     Física simplificada: aquecimento proporcional à captação,
-     resfriamento natural em direção à temperatura ambiente.
      ═══════════════════════════════════════════════════════════ */
   const sim = {
     on: false, cloudy: false, temp: 22,
@@ -205,22 +229,17 @@
   const say = (msg) => { if (el.announce) el.announce.textContent = msg; };
 
   function render() {
-    // Temperatura (pt-BR usa vírgula)
     el.temp.textContent = fmt(sim.temp, 1);
 
-    // Termômetro: escala didática 20–40 °C
     const pct = Math.max(0, Math.min(1, (sim.temp - 20) / 20)) * 100;
     el.fill.style.height = pct + '%';
 
-    // Aquecimento visual da água (0 → 1)
     const warmth = Math.max(0, Math.min(1, (sim.temp - 24) / (sim.TARGET - 24)));
     el.stage.style.setProperty('--warmth', warmth.toFixed(2));
 
-    // Estados visuais
-    el.stage.dataset.state   = sim.on ? 'on' : 'off';
-    el.stage.dataset.cloudy  = String(sim.cloudy);
+    el.stage.dataset.state  = sim.on ? 'on' : 'off';
+    el.stage.dataset.cloudy = String(sim.cloudy);
 
-    // Painel de dados
     if (sim.on) {
       const base = sim.cloudy ? 340 : 860;
       const luxBase = sim.cloudy ? 320 : 980;
@@ -238,7 +257,6 @@
     const delta = sim.TARGET - sim.temp;
     el.delta.textContent = delta <= 0 ? 'meta atingida ✔' : fmt(delta, 1) + ' °C';
 
-    // Estado textual
     if (!sim.on) {
       el.state.dataset.state = 'off';
       el.state.textContent = sim.temp > sim.AMBIENT + 0.5
@@ -255,16 +273,13 @@
 
   function tick() {
     if (sim.on) {
-      // Taxa menor quando nublado e quando se aproxima da meta
       const proximity = 1 - Math.max(0, (sim.temp - (sim.TARGET - 3)) / 3) * 0.6;
       sim.temp += (sim.cloudy ? 0.018 : 0.052) * proximity;
       if (sim.temp >= sim.TARGET) { sim.temp = sim.TARGET; }
     } else {
-      // Resfriamento natural em direção à temperatura ambiente
       sim.temp += (sim.AMBIENT - sim.temp) * 0.004;
     }
 
-    // Anúncios para leitores de tela (somente marcos importantes)
     if (sim.on && !sim.flags.warm && sim.temp >= 28) {
       sim.flags.warm = true;
       say('A água atingiu 28 graus Celsius: início da faixa de conforto.');
@@ -297,7 +312,6 @@
         startTimer();
       } else {
         say('Sistema desligado. A água esfriará lentamente até a temperatura ambiente.');
-        // mantém o timer ativo para o resfriamento ser visível
       }
       render();
     });
