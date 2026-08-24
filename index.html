@@ -7,12 +7,27 @@
   <meta name="description" content="Projeto Integrador do CEP: solução conceitual de automação e aquecimento sustentável para a piscina térmica, unindo óptica, energia solar, robótica e acessibilidade.">
   <meta name="theme-color" content="#05131D">
 
-  <!-- Fontes: Display (Space Grotesk) + Corpo legível (IBM Plex Sans) + Dados (IBM Plex Mono) -->
+  <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+
+  <!-- Aplica o tema salvo ANTES da renderização (evita "flash" de tema errado) -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('aquasol-theme');
+        if (!t) {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
 </head>
 <body>
 
@@ -37,20 +52,29 @@
         <span class="brand__txt">AquaSol<em>CEP</em></span>
       </a>
 
-      <nav aria-label="Navegação principal">
-        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="menuPrincipal">
-          <span class="nav-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
-          Menu
+      <div class="topbar__actions">
+        <nav aria-label="Navegação principal">
+          <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="menuPrincipal">
+            <span class="nav-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+            Menu
+          </button>
+          <ul class="menu" id="menuPrincipal">
+            <li><a href="#inicio" class="is-active">Início</a></li>
+            <li><a href="#tecnociencia">Tecnociência &amp; Óptica</a></li>
+            <li><a href="#robotica">Robótica &amp; Programação</a></li>
+            <li><a href="#simulador">Simulador</a></li>
+            <li><a href="#acessibilidade">Acessibilidade</a></li>
+            <li><a href="#equipe">Equipe</a></li>
+          </ul>
+        </nav>
+
+        <!-- Botão de tema SEMPRE visível (fora do menu) -->
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false"
+                aria-label="Alternar entre modo claro e modo noturno">
+          <span class="theme-toggle__icon" aria-hidden="true">🌙</span>
+          <span class="theme-toggle__txt">Modo noturno</span>
         </button>
-        <ul class="menu" id="menuPrincipal">
-          <li><a href="#inicio" class="is-active">Início</a></li>
-          <li><a href="#tecnociencia">Tecnociência &amp; Óptica</a></li>
-          <li><a href="#robotica">Robótica &amp; Programação</a></li>
-          <li><a href="#simulador">Simulador</a></li>
-          <li><a href="#acessibilidade">Acessibilidade</a></li>
-          <li><a href="#equipe">Equipe</a></li>
-        </ul>
-      </nav>
+      </div>
     </div>
   </header>
 
@@ -472,7 +496,7 @@ SENÃO SE agua ≥ 32.0  OU  painel ≤ agua ENTÃO
               </div>
             </article>
 
-            <figure class="fig reveal" style="--d:.05s">
+            <figure class="fig fig--compact reveal" style="--d:.05s">
               <img src="https://picsum.photos/seed/arduino-sensores-robotica/900/560" width="900" height="560" loading="lazy"
                    alt="Bancada de prototipagem com placa microcontroladora, jumpers coloridos, sensor de temperatura e módulo relé montados em uma protoboard.">
               <figcaption>Bancada de prototipagem: microcontrolador, sensor de temperatura e relé. <span class="mono">(imagem ilustrativa)</span></figcaption>
@@ -563,7 +587,7 @@ SENÃO SE agua ≥ 32.0  OU  painel ≤ agua ENTÃO
 
     <!-- Onda para a acessibilidade -->
     <div class="wave-div" style="background:var(--paper)" aria-hidden="true">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0 44 C 200 12 400 70 620 40 C 840 10 1020 66 1240 38 C 1340 26 1400 38 1440 34 L1440 80 L0 80 Z" fill="#E6F1EF"/></svg>
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0 44 C 200 12 400 70 620 40 C 840 10 1020 66 1240 38 C 1340 26 1400 38 1440 34 L1440 80 L0 80 Z" fill="var(--pool)"/></svg>
     </div>
 
     <!-- ══════════════════════ ACESSIBILIDADE NA PISCINA ══════════════════════ -->
@@ -708,7 +732,6 @@ SENÃO SE agua ≥ 32.0  OU  painel ≤ agua ENTÃO
         <a href="#robotica">Robótica</a>
         <a href="#simulador">Simulador</a>
         <a href="#acessibilidade">Acessibilidade</a>
-        <a href="#topo" id="backTop">↑ Voltar ao topo</a>
       </nav>
 
       <div class="footer__bottom">
