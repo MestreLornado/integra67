@@ -1,744 +1,717 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AquaSol CEP — Aquecimento Solar e Automação da Piscina Térmica</title>
-  <meta name="description" content="Projeto Integrador do CEP: solução conceitual de automação e aquecimento sustentável para a piscina térmica, unindo óptica, energia solar, robótica e acessibilidade.">
-  <meta name="theme-color" content="#05131D">
-
-  <!-- Fontes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Aplica o tema salvo ANTES da renderização (evita "flash" de tema errado) -->
-  <script>
-    (function () {
-      try {
-        var t = localStorage.getItem('aquasol-theme');
-        if (!t) {
-          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
-        document.documentElement.setAttribute('data-theme', t);
-      } catch (e) {
-        document.documentElement.setAttribute('data-theme', 'light');
-      }
-    })();
-  </script>
-</head>
-<body>
-
-  <a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
-  <div class="progress" id="progressBar" aria-hidden="true"></div>
-  <div class="noise" aria-hidden="true"></div>
-
-  <!-- ══════════════════════ CABEÇALHO ══════════════════════ -->
-  <header class="topbar" id="topbar">
-    <div class="container topbar__inner">
-      <a class="brand" href="#inicio" aria-label="AquaSol CEP — voltar ao início">
-        <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
-          <circle cx="20" cy="14" r="7" fill="var(--solar)"/>
-          <g stroke="var(--solar)" stroke-width="2" stroke-linecap="round">
-            <line x1="20" y1="1" x2="20" y2="4"/><line x1="9" y1="5" x2="11" y2="7.5"/>
-            <line x1="31" y1="5" x2="29" y2="7.5"/><line x1="5" y1="14" x2="8" y2="14"/>
-            <line x1="35" y1="14" x2="32" y2="14"/>
-          </g>
-          <path d="M4 28c4-3 8-3 12 0s8 3 12 0 8-3 12 0" fill="none" stroke="var(--aqua)" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M4 34c4-3 8-3 12 0s8 3 12 0 8-3 12 0" fill="none" stroke="var(--aqua)" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
-        </svg>
-        <span class="brand__txt">AquaSol<em>CEP</em></span>
-      </a>
-
-      <nav aria-label="Navegação principal">
-        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="menuPrincipal">
-          <span class="nav-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
-          Menu
-        </button>
-        <ul class="menu" id="menuPrincipal">
-          <li><a href="#inicio" class="is-active">Início</a></li>
-          <li><a href="#tecnociencia">Tecnociência &amp; Óptica</a></li>
-          <li><a href="#robotica">Robótica &amp; Programação</a></li>
-          <li><a href="#simulador">Simulador</a></li>
-          <li><a href="#acessibilidade">Acessibilidade</a></li>
-          <li><a href="#equipe">Equipe</a></li>
-          <li class="menu__theme">
-            <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">
-              <span class="theme-toggle__icon" aria-hidden="true">🌙</span>
-              <span class="theme-toggle__txt">Modo noturno</span>
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main id="conteudo">
-
-    <!-- ══════════════════════ HERO / INÍCIO ══════════════════════ -->
-    <section class="hero" id="inicio" aria-labelledby="heroTitle">
-      <div class="container hero__grid">
-
-        <div class="hero__copy">
-          <p class="hero__kicker mono" id="kicker" data-text="PROJETO INTEGRADOR · CEP · CIÊNCIA QUE AQUECE">PROJETO INTEGRADOR · CEP · CIÊNCIA QUE AQUECE</p>
-
-          <h1 class="hero__title" id="heroTitle">
-            <span class="line" style="--ld:.1s"><span>A luz do sol vira <em>calor</em>.</span></span>
-            <span class="line" style="--ld:.25s"><span>A automação vira <em>precisão</em>.</span></span>
-            <span class="line" style="--ld:.4s"><span>O projeto vira <em>impacto social</em>.</span></span>
-          </h1>
-
-          <p class="hero__lead">
-            O <strong>AquaSol</strong> é uma solução conceitual de aquecimento sustentável e
-            automação para a <strong>piscina térmica do CEP</strong>: coletores solares transformam
-            radiação em energia térmica, enquanto sensores e programação mantêm a água na
-            temperatura ideal — com conforto, segurança, acessibilidade e
-            <strong>zero custo elétrico de aquecimento</strong>.
-          </p>
-
-          <div class="hero__cta">
-            <a class="btn btn--primary" href="#simulador">⚡ Testar o simulador</a>
-            <a class="btn btn--ghost" href="#tecnociencia">Entender a ciência ↓</a>
-          </div>
-
-          <ul class="hero__chips" aria-label="Destaques do projeto">
-            <li>🌡️ +12&nbsp;°C de ganho térmico</li>
-            <li>☀️ 100% energia solar</li>
-            <li>🤖 Operação automática</li>
-          </ul>
-        </div>
-
-        <!-- Cena ilustrativa animada: sol, coletor e piscina -->
-        <div class="hero__scene" role="img"
-             aria-label="Ilustração animada: o sol emite raios que incidem sobre um coletor solar plano; a água captada aquecida é conduzida por tubulações até a piscina térmica, representada com ondas suaves.">
-          <svg viewBox="0 0 520 470" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="gWater" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#2FA9C0"/><stop offset="1" stop-color="#0B4560"/>
-              </linearGradient>
-              <linearGradient id="gPanel" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#12324A"/><stop offset="1" stop-color="#0A1E2C"/>
-              </linearGradient>
-            </defs>
-
-            <!-- Sol -->
-            <g class="sunG">
-              <g class="rays" stroke="#FFC94A" stroke-width="5" stroke-linecap="round">
-                <line x1="83" y1="22" x2="83" y2="36"/><line x1="83" y1="136" x2="83" y2="150"/>
-                <line x1="19" y1="86" x2="33" y2="86"/><line x1="133" y1="86" x2="147" y2="86"/>
-                <line x1="38" y1="41" x2="48" y2="51"/><line x1="118" y1="121" x2="128" y2="131"/>
-                <line x1="128" y1="41" x2="118" y2="51"/><line x1="48" y1="121" x2="38" y2="131"/>
-              </g>
-              <circle cx="83" cy="86" r="36" fill="#FFC94A"/>
-              <circle cx="83" cy="86" r="26" fill="#FFB531"/>
-            </g>
-
-            <!-- Feixes de radiação até o coletor -->
-            <g class="beams" stroke="#FFB531" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 12">
-              <line x1="130" y1="118" x2="238" y2="188"/>
-              <line x1="118" y1="138" x2="226" y2="208"/>
-              <line x1="140" y1="102" x2="250" y2="172"/>
-            </g>
-
-            <!-- Coletor solar -->
-            <g class="panel">
-              <polygon points="210,180 430,150 460,240 240,270" fill="url(#gPanel)" stroke="#1E5A75" stroke-width="3"/>
-              <g stroke="#2C7DA0" stroke-width="1.5" opacity=".8">
-                <line x1="265" y1="172" x2="295" y2="262"/><line x1="320" y1="165" x2="350" y2="255"/>
-                <line x1="375" y1="158" x2="405" y2="247"/>
-                <line x1="222" y1="210" x2="442" y2="180"/><line x1="232" y1="240" x2="452" y2="210"/>
-              </g>
-            </g>
-
-            <!-- Tubulação -->
-            <path d="M255 272 C 255 300, 150 300, 140 330" fill="none" stroke="#8FB8C9" stroke-width="7" stroke-linecap="round"/>
-            <path d="M420 246 C 430 292, 400 305, 385 330" fill="none" stroke="#8FB8C9" stroke-width="7" stroke-linecap="round"/>
-
-            <!-- Piscina -->
-            <rect x="42" y="330" width="440" height="106" rx="20" fill="url(#gWater)"/>
-            <g class="waves">
-              <path class="wave w1" d="M42 340 q 30 -12 60 0 t 60 0 t 60 0 t 60 0 t 60 0 t 60 0 t 60 0 v 20 h -420 z" fill="#7FE3DF" opacity=".35"/>
-              <path class="wave w2" d="M42 348 q 30 -10 60 0 t 60 0 t 60 0 t 60 0 t 60 0 t 60 0 t 60 0 v 16 h -420 z" fill="#56E1D4" opacity=".3"/>
-            </g>
-            <g class="heatDots" fill="#FFB531">
-              <circle class="dot d1" cx="200" cy="410" r="5"/>
-              <circle class="dot d2" cx="270" cy="418" r="4"/>
-              <circle class="dot d3" cx="330" cy="408" r="5"/>
-            </g>
-            <g class="warmBadge">
-              <rect x="360" y="368" width="98" height="34" rx="17" fill="#05131D" stroke="#FFB531" stroke-width="2"/>
-              <text x="409" y="390" text-anchor="middle" fill="#FFD98A" font-family="IBM Plex Mono, monospace" font-size="15">34,0 °C</text>
-            </g>
-          </svg>
-
-          <div class="float-card float-card--a reveal">☀️ <strong>Captação 100% solar</strong><span>sem consumo da rede elétrica</span></div>
-          <div class="float-card float-card--b reveal" style="--d:.2s">🍃 <strong>≈ 3,5 t de CO₂ evitadas</strong><span>por ano letivo</span></div>
-        </div>
-      </div>
-
-      <!-- Faixa de indicadores -->
-      <div class="container">
-        <dl class="stats" aria-label="Indicadores estimados do projeto">
-          <div class="stat reveal"><dd><span class="count" data-count="15000">0</span> L</dd><dt>de água aquecida em circulação</dt></div>
-          <div class="stat reveal" style="--d:.1s"><dd>+<span class="count" data-count="12">0</span> °C</dd><dt>de elevação média na temperatura</dt></div>
-          <div class="stat reveal" style="--d:.2s"><dd><span class="count" data-count="100">0</span> %</dd><dt>da energia térmica vem do sol</dt></div>
-          <div class="stat reveal" style="--d:.3s"><dd><span class="count" data-count="3.5" data-dec="1">0</span> t</dd><dt>de CO₂ evitadas por ano</dt></div>
-        </dl>
-      </div>
-
-      <!-- Letreiro contínuo -->
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee__track">
-          <span>Óptica ✦ Absorção ✦ Dispersão ✦ Difração ✦ Disco de Newton ✦ Câmara Escura ✦ Coletores Solares ✦ Arduino ✦ Sensores ✦ Atuadores ✦ Energia Limpa ✦ ODS 7 e 13 ✦ Acessibilidade ✦&nbsp;</span>
-          <span>Óptica ✦ Absorção ✦ Dispersão ✦ Difração ✦ Disco de Newton ✦ Câmara Escura ✦ Coletores Solares ✦ Arduino ✦ Sensores ✦ Atuadores ✦ Energia Limpa ✦ ODS 7 e 13 ✦ Acessibilidade ✦&nbsp;</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Onda divisória -->
-    <div class="wave-div wave-div--paper" aria-hidden="true">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0 48 C 180 8 340 84 540 52 C 740 20 900 76 1100 50 C 1260 30 1360 44 1440 34 L1440 80 L0 80 Z" fill="var(--paper)"/></svg>
-    </div>
-
-    <!-- ══════════════════════ TECNOCIÊNCIA & ÓPTICA ══════════════════════ -->
-    <section class="section section--paper" id="tecnociencia" aria-labelledby="tecTitle">
-      <div class="container">
-
-        <header class="sec-head reveal">
-          <p class="kicker mono">01 · TECNOCIÊNCIA &amp; ÓPTICA</p>
-          <h2 id="tecTitle"><span class="uline">Da radiação ao calor:</span> a física por trás do coletor</h2>
-          <p class="sec-head__lead">
-            Antes de existir tecnologia, existe luz. Entender como a radiação solar se comporta —
-            e por que certos materiais a absorvem melhor — foi o ponto de partida do AquaSol.
-          </p>
-        </header>
-
-        <div class="tec-grid">
-          <article class="tec-text reveal">
-            <h3>Como o coletor solar aquece a piscina</h3>
-            <p>
-              O coração térmico do projeto é o <strong>coletor solar plano</strong>: uma caixa com cobertura
-              de vidro transparente que abriga uma <strong>placa absorvedora escura</strong>, geralmente de cobre
-              ou alumínio pintados de preto fosco, percorrida por tubulações de água. A radiação solar
-              — luz visível e infravermelho — atravessa o vidro e atinge a placa, cujos átomos convertem
-              essa energia eletromagnética em <strong>agitação térmica</strong>. A água que circula pelas
-              tubulações retira esse calor por condução e o transporta até a piscina, num ciclo contínuo
-              alimentado apenas pelo sol.
-            </p>
-            <p>
-              Dois detalhes elevam a eficiência: o <strong>efeito estufa interno</strong> (o vidro deixa a
-              radiação entrar, mas bloqueia parte do calor reirradiado pela placa) e a
-              <strong>inclinação orientada ao norte geográfico</strong>, que maximiza o ângulo de incidência
-              dos raios ao longo do dia.
-            </p>
-
-            <h3>A analogia das cores: por que a placa é preta?</h3>
-            <p>
-              Aqui entra a óptica que estudamos em sala. <strong>Cor não é o que o objeto “tem”, mas o que
-              ele devolve</strong>: uma superfície vermelha reflete o vermelho e absorve os demais comprimentos
-              de onda; uma branca reflete quase tudo; e uma <strong>preta absorve praticamente todo o espectro
-              visível</strong>. Foi exatamente isso que Isaac Newton demonstrou com seu célebre
-              <strong>Disco de Newton</strong>: ao pintar um disco com as sete cores do espectro e girá-lo
-              rapidamente, as cores se somam diante do olho e percebemos o <strong>branco</strong> — prova de
-              que a luz branca é a <em>soma</em> de todas as cores.
-            </p>
-            <p>
-              O coletor inverte a experiência: se o disco giratório <em>recompõe</em> todas as cores em luz
-              branca, a placa preta <em>acolhe</em> todas as cores de uma só vez, absorvendo cada faixa do
-              espectro em vez de devolvê-la ao ambiente. <strong>Mais cor absorvida = mais energia convertida
-              em calor.</strong> É a mesma física, nos dois sentidos.
-            </p>
-            <p>
-              E a <strong>Câmara Escura</strong> completa o raciocínio: ao atravessar um pequeno orifício, a
-              luz forma uma imagem invertida porque <strong>se propaga em linha reta</strong>, sem precisar de
-              um meio material. Esse princípio explica por que a energia do sol cruza o vácuo do espaço,
-              atravessa o vidro do coletor e atinge a placa em trajetórias retilíneas — e por que podemos
-              <strong>posicionar e inclinar os painéis</strong> para “mirar” essa trajetória, capturando o
-              máximo de radiação possível. Luz em linha reta, placa certa, calor garantido.
-            </p>
-
-            <h3>Dispersão por difração: o arco-íris escondido no CD</h3>
-            <p>
-              Existem dois caminhos físicos para separar a luz branca em cores. No prisma de Newton, a
-              <strong>dispersão ocorre por refração</strong>: o índice de refração do vidro varia com o
-              comprimento de onda, então o violeta “freia” e desvia mais que o vermelho. Mas há um segundo
-              caminho, tão elegante quanto: a <strong>difração</strong>. Quando a luz encontra fendas
-              comparáveis ao seu comprimento de onda, ela se espalha; se as fendas forem muitas e
-              regularmente espaçadas — uma <strong>rede de difração</strong> — as ondas espalhadas interferem
-              entre si e produzem franjas brilhantes em ângulos que dependem de λ, segundo a equação
-              <strong>d · sen θ = m · λ</strong>. Quanto maior o comprimento de onda, maior o ângulo: aqui é o
-              <strong>vermelho que desvia mais</strong> — exatamente o oposto do prisma.
-            </p>
-            <p>
-              Um CD é uma rede de difração de reflexão: suas trilhas, separadas por cerca de 1,6 µm,
-              decompõem a luz naqueles reflexos arco-íris. No projeto, usamos um
-              <strong>espectroscópio caseiro de CD</strong> para decompor a luz do sol e comprovar
-              experimentalmente aquilo que o coletor já “sabia”: a radiação solar contém
-              <strong>todas as cores do espectro visível</strong> (e também infravermelho). É por isso que a
-              placa preta funciona tão bem — há energia em todas as faixas para ser absorvida. Difração e
-              dispersão são, assim, as ferramentas que nos permitem <em>enxergar</em> o combustível do AquaSol.
-            </p>
-
-            <figure class="fig">
-              <img src="https://picsum.photos/seed/coletor-solar-piscina/900/620" width="900" height="620" loading="lazy"
-                   alt="Fotografia ilustrativa de um coletor solar plano instalado sobre uma estrutura metálica, com tubulações conduzindo água até uma piscina ao fundo.">
-              <figcaption>Coletor solar plano: a superfície escura maximiza a absorção de radiação. <span class="mono">(imagem ilustrativa)</span></figcaption>
-            </figure>
-          </article>
-
-          <aside class="tec-side">
-            <!-- Espectro visível -->
-            <figure class="spectrum-card reveal">
-              <div class="spectrum" aria-hidden="true">
-                <span style="left:0">380 nm</span><span style="right:0">750 nm</span>
-              </div>
-              <figcaption>O <strong>espectro visível</strong>: a pequena fatia da radiação que enxergamos.
-              O coletor aproveita também o <strong>infravermelho</strong>, invisível, mas rico em energia térmica.</figcaption>
-            </figure>
-
-            <!-- Disco de Newton interativo -->
-            <div class="disc-card reveal" style="--d:.1s">
-              <h3>Experimente: o Disco de Newton</h3>
-              <div class="disc-wrap">
-                <div class="newton-disc" id="newtonDisc" aria-hidden="true"></div>
-              </div>
-              <button class="btn btn--small btn--dark" id="discBtn" type="button" aria-pressed="false">▶ Girar o disco</button>
-              <p class="disc-cap mono" id="discCaption" aria-live="polite">Em repouso, vemos 7 cores distintas.</p>
-            </div>
-
-            <!-- Câmara escura -->
-            <div class="pin-card reveal" style="--d:.15s">
-              <h3>Câmara escura: luz em linha reta</h3>
-              <svg viewBox="0 0 300 150" aria-hidden="true" focusable="false" class="pinhole">
-                <rect x="60" y="15" width="230" height="120" rx="8" fill="#0A2233" stroke="#1E5A75" stroke-width="2"/>
-                <circle cx="60" cy="75" r="3.5" fill="#FFB531"/>
-                <polygon points="26,42 26,108 57,78" fill="#FFB531" opacity=".9"/>
-                <g stroke="#FFD98A" stroke-width="1.6" stroke-dasharray="4 5">
-                  <line x1="26" y1="46" x2="278" y2="106"/>
-                  <line x1="26" y1="104" x2="278" y2="44"/>
-                </g>
-                <polygon points="278,40 278,110 262,75" fill="#56E1D4" opacity=".9"/>
-                <text x="150" y="146" text-anchor="middle" font-size="10" fill="#A9C6CD" font-family="IBM Plex Mono, monospace">raios cruzam o orifício → imagem invertida</text>
-              </svg>
-              <p>Assim como a luz atravessa o orifício e projeta uma imagem, a radiação solar
-              atravessa o vidro do coletor em linha reta até a placa absorvedora.</p>
-            </div>
-
-            <!-- Rede de difração: demonstração interativa -->
-            <div class="cd-card reveal" style="--d:.2s">
-              <h3>Experimente: difração em um CD</h3>
-              <div class="cd-lab" id="cdLab" aria-hidden="true">
-                <span class="cd-lab__beam"></span>
-                <span class="cd-lab__disc"></span>
-                <span class="cd-lab__rays">
-                  <i></i><i></i><i></i><i></i><i></i><i></i>
-                </span>
-              </div>
-              <button class="btn btn--small btn--dark" id="cdBtn" type="button" aria-pressed="false">◐ Ativar difração</button>
-              <p class="disc-cap mono" id="cdCaption" aria-live="polite">Luz branca incide sobre as trilhas do CD.</p>
-            </div>
-          </aside>
-        </div>
-
-        <!-- Princípios ópticos -->
-        <div class="principles">
-          <article class="principle reveal">
-            <span class="principle__icon" aria-hidden="true">🌡️</span>
-            <h3>Absorção seletiva</h3>
-            <p>Materiais escuros e foscos têm alta <strong>absortância</strong>: transformam até ~95% da
-            radiação incidente em calor, enquanto superfícies claras e polidas a refletem de volta ao céu.</p>
-          </article>
-          <article class="principle reveal" style="--d:.12s">
-            <span class="principle__icon" aria-hidden="true">🎨</span>
-            <h3>Cor = reflexão</h3>
-            <p>A cor que vemos é o comprimento de onda <strong>rejeitado</strong> pelo material. O preto do
-            coletor significa: <strong>nada é devolvido</strong>, tudo vira energia térmica.</p>
-          </article>
-          <article class="principle reveal" style="--d:.24s">
-            <span class="principle__icon" aria-hidden="true">📐</span>
-            <h3>Propagação retilínea</h3>
-            <p>A câmara escura prova que a luz viaja em linha reta. Por isso <strong>inclinação e orientação</strong>
-            dos painéis são calculadas para interceptar o trajeto dos raios solares.</p>
-          </article>
-          <article class="principle reveal" style="--d:.36s">
-            <span class="principle__icon" aria-hidden="true">📀</span>
-            <h3>Difração também dispersa</h3>
-            <p>Redes de difração (como as trilhas de um CD) separam cores por interferência:
-            <strong>d · sen θ = m · λ</strong>. O vermelho, com maior λ, desvia mais — e foi assim que
-            montamos nosso espectroscópio solar caseiro.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Onda para a seção escura -->
-    <div class="wave-div wave-div--ink" aria-hidden="true">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0 30 C 200 70 380 6 580 40 C 780 74 940 14 1140 44 C 1300 66 1380 40 1440 52 L1440 80 L0 80 Z" fill="var(--ink)"/></svg>
-    </div>
-
-    <!-- ══════════════════════ ROBÓTICA & PROGRAMAÇÃO ══════════════════════ -->
-    <section class="section section--ink" id="robotica" aria-labelledby="robTitle">
-      <div class="container">
-
-        <header class="sec-head reveal">
-          <p class="kicker kicker--solar mono">02 · ROBÓTICA &amp; PROGRAMAÇÃO</p>
-          <h2 id="robTitle"><span class="uline uline--solar">O cérebro do sistema:</span> perceber, decidir, agir</h2>
-          <p class="sec-head__lead">
-            Calor sem controle é desperdício. A camada de automação observa a piscina 24 horas por dia
-            e decide, sozinha, quando fazer a água circular.
-          </p>
-        </header>
-
-        <div class="rob-grid">
-
-          <!-- Coluna fixa: telemetria -->
-          <aside class="rob-sticky">
-            <div class="tele reveal" aria-hidden="true">
-              <p class="tele__head mono"><span class="tele__dot"></span>TELEMETRIA · MODO AUTOMÁTICO</p>
-              <dl class="tele__grid mono">
-                <div><dt>Água</dt><dd><span id="telTemp">29,4</span> °C</dd></div>
-                <div><dt>Luz</dt><dd><span id="telLux">742</span> lx</dd></div>
-                <div><dt>Bomba</dt><dd id="telPump">ATIVA</dd></div>
-                <div><dt>Painel</dt><dd><span id="telPanel">41,8</span> °C</dd></div>
-              </dl>
-              <div class="tele__bars" aria-hidden="true">
-                <i style="--h:62%"></i><i style="--h:78%"></i><i style="--h:55%"></i><i style="--h:84%"></i>
-                <i style="--h:70%"></i><i style="--h:60%"></i><i style="--h:88%"></i><i style="--h:74%"></i>
-              </div>
-            </div>
-            <p class="visually-hidden">Painel ilustrativo de telemetria exibindo leituras fictícias de temperatura da água, luminosidade, estado da bomba e temperatura do painel solar.</p>
-
-            <!-- Diagrama de fluxo -->
-            <div class="flow reveal" style="--d:.15s">
-              <p class="flow__title mono">FLUXO DE CONTROLE</p>
-              <div class="flow__row">
-                <span class="flow__chip flow__chip--s">📡 Sensores</span>
-                <svg class="flow__arrow" viewBox="0 0 60 20" aria-hidden="true"><path class="dashline" d="M2 10 H50 M44 4 L52 10 L44 16" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                <span class="flow__chip flow__chip--c">🧠 Controlador</span>
-                <svg class="flow__arrow" viewBox="0 0 60 20" aria-hidden="true"><path class="dashline" d="M2 10 H50 M44 4 L52 10 L44 16" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                <span class="flow__chip flow__chip--a">⚙️ Atuadores</span>
-              </div>
-            </div>
-          </aside>
-
-          <!-- Coluna rolável: etapas -->
-          <div class="rob-steps">
-
-            <article class="step reveal">
-              <p class="step__num" aria-hidden="true">01</p>
-              <div>
-                <h3>Percepção — os sentidos do sistema</h3>
-                <p>Um <strong>sensor de temperatura DS18B20</strong> (à prova d'água) fica imerso na piscina e
-                reporta a temperatura com precisão de ±0,5 °C. Um <strong>LDR (resistor dependente de luz)</strong>
-                em divisor de tensão mede a luminosidade ambiente: assim o sistema sabe se é dia, noite ou se o
-                céu está encoberto. Um terceiro sensor compara a temperatura do painel com a da água.</p>
-                <ul class="tags mono" aria-label="Componentes de entrada">
-                  <li>DS18B20</li><li>LDR</li><li>NTC no coletor</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="step reveal" style="--d:.05s">
-              <p class="step__num" aria-hidden="true">02</p>
-              <div>
-                <h3>Decisão — a lógica embarcada</h3>
-                <p>O <strong>microcontrolador (Arduino/ESP32)</strong> executa um laço contínuo: lê os sensores,
-                filtra ruídos com média móvel e compara as leituras com a <strong>faixa de conforto
-                (28–32 °C)</strong>. A regra de ouro é o <em>controle diferencial</em>: a bomba só liga quando o
-                painel está <strong>mais quente que a piscina</strong> — evitando resfriar a água durante a noite.</p>
-                <pre class="code mono" tabindex="0" aria-label="Pseudocódigo da lógica de controle do sistema"><code>// laço principal — a cada 5 segundos
-agua   ← ler( sensor_temperatura )
-luz    ← ler( LDR )
-painel ← ler( sensor_coletor )
-
-SE agua < 28.0  E  luz > 400  E  painel > agua + 2 ENTÃO
-      acionar RELE_BOMBA        // água circula e aquece
-SENÃO SE agua ≥ 32.0  OU  painel ≤ agua ENTÃO
-      desligar RELE_BOMBA       // protege contra resfriamento</code></pre>
-              </div>
-            </article>
-
-            <article class="step reveal" style="--d:.05s">
-              <p class="step__num" aria-hidden="true">03</p>
-              <div>
-                <h3>Ação — os atuadores em movimento</h3>
-                <p>A decisão vira movimento: um <strong>módulo relé</strong> aciona a
-                <strong>bomba de circulação</strong>, empurrando a água fria da piscina pelas tubulações do
-                coletor e devolvendo-a aquecida. <strong>LEDs de sinalização</strong> comunicam o estado
-                (verde = em espera, âmbar = aquecendo) e uma <strong>válvula de retenção</strong> impede o
-                refluxo quando o sistema desliga.</p>
-              </div>
-            </article>
-
-            <article class="step reveal" style="--d:.05s">
-              <p class="step__num" aria-hidden="true">04</p>
-              <div>
-                <h3>Segurança — o painel elétrico</h3>
-                <p>Toda potência passa por um <strong>painel com disjuntor termomagnético, dispositivo DR e
-                aterramento</strong>, protegendo pessoas e equipamentos em ambiente úmido. Intertravamentos
-                físicos impedem que a bomba funcione a seco, e fusíveis protegem o circuito de sensores.</p>
-              </div>
-            </article>
-
-            <article class="step reveal" style="--d:.05s">
-              <p class="step__num" aria-hidden="true">05</p>
-              <div>
-                <h3>Impacto — por que automatizar importa</h3>
-                <p>A piscina térmica do CEP é usada em <strong>natação, hidroterapia e reabilitação</strong>:
-                a constância da temperatura é questão de saúde e inclusão. Ao manter a água entre 28 e 32 °C
-                sem custo elétrico de aquecimento, o AquaSol <strong>amplia o uso pedagógico da piscina o ano
-                inteiro</strong> e libera recursos da escola para outras finalidades educativas.</p>
-              </div>
-            </article>
-
-            <figure class="fig fig--compact reveal" style="--d:.05s">
-              <img src="https://picsum.photos/seed/arduino-sensores-robotica/900/560" width="900" height="560" loading="lazy"
-                   alt="Bancada de prototipagem com placa microcontroladora, jumpers coloridos, sensor de temperatura e módulo relé montados em uma protoboard.">
-              <figcaption>Bancada de prototipagem: microcontrolador, sensor de temperatura e relé. <span class="mono">(imagem ilustrativa)</span></figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Onda para o simulador -->
-    <div class="wave-div" style="background:var(--ink)" aria-hidden="true">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0 40 C 220 8 420 72 640 44 C 860 16 1040 70 1240 42 C 1340 28 1400 40 1440 36 L1440 80 L0 80 Z" fill="var(--paper)"/></svg>
-    </div>
-
-    <!-- ══════════════════════ SIMULADOR ══════════════════════ -->
-    <section class="section section--paper" id="simulador" aria-labelledby="simTitle">
-      <div class="container">
-
-        <header class="sec-head reveal">
-          <p class="kicker mono">03 · SIMULADOR INTERATIVO</p>
-          <h2 id="simTitle"><span class="uline">Sinta o sistema funcionando</span></h2>
-          <p class="sec-head__lead">
-            Aperte o botão e observe: o sol incide sobre o coletor, a bomba entra em ação e a temperatura
-            da piscina sobe até a meta de <strong>34 °C</strong> da demonstração. Valores ilustrativos, com
-            fins didáticos.
-          </p>
-        </header>
-
-        <div class="sim-grid">
-
-          <!-- Painel de controle -->
-          <div class="sim-controls reveal">
-            <button class="btn btn--primary btn--xl" id="simPower" type="button" aria-pressed="false">
-              ⚡ Ligar Sistema Solar
-            </button>
-
-            <label class="switch">
-              <input type="checkbox" id="simCloud">
-              <span class="switch__track" aria-hidden="true"></span>
-              <span>Simular dia nublado <small>(captação reduzida)</small></span>
-            </label>
-
-            <div class="sim-readout">
-              <p class="sim-readout__label mono">TEMPERATURA DA ÁGUA</p>
-              <p class="sim-readout__value mono"><span id="simTemp">22,0</span><span class="unit">°C</span></p>
-              <p class="sim-readout__state" id="simState" data-state="off">● Sistema em espera</p>
-            </div>
-
-            <dl class="sim-status mono">
-              <div><dt>Bomba d'água</dt><dd id="stPump">desligada</dd></div>
-              <div><dt>Captação solar</dt><dd id="stPower">0 W</dd></div>
-              <div><dt>Luminosidade</dt><dd id="stLux">—</dd></div>
-              <div><dt>ΔT até a meta</dt><dd id="stDelta">12,0 °C</dd></div>
-            </dl>
-
-            <button class="btn btn--ghost btn--small" id="simReset" type="button">↺ Reiniciar simulação</button>
-            <p class="visually-hidden" role="status" aria-live="polite" id="simAnnounce"></p>
-          </div>
-
-          <!-- Palco visual -->
-          <div class="sim-stage reveal" style="--d:.15s">
-            <div class="stage" id="simStage" data-state="off" aria-hidden="true">
-              <div class="stage__sky">
-                <div class="sun"><span class="sun__rays"></span></div>
-                <div class="cloud"></div>
-              </div>
-
-              <div class="stage__panel"><span>coletor</span></div>
-              <span class="stage__heat"><i></i><i></i><i></i></span>
-
-              <div class="stage__pool">
-                <span class="stage__waves"></span>
-                <span class="bubble b1"></span><span class="bubble b2"></span>
-                <span class="bubble b3"></span><span class="bubble b4"></span>
-              </div>
-
-              <div class="thermo">
-                <span class="thermo__scale mono" aria-hidden="true"><i>40°</i><i>31°</i><i>22°</i></span>
-                <span class="thermo__tube"><span class="thermo__fill" id="thermoFill" style="height:10%"></span></span>
-                <span class="thermo__bulb"></span>
-              </div>
-            </div>
-            <p class="sim-caption mono">sol → coletor → bomba → piscina · meta da demo: 34 °C · ambiente: 22 °C</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Onda para a acessibilidade -->
-    <div class="wave-div" style="background:var(--paper)" aria-hidden="true">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0 44 C 200 12 400 70 620 40 C 840 10 1020 66 1240 38 C 1340 26 1400 38 1440 34 L1440 80 L0 80 Z" fill="var(--pool)"/></svg>
-    </div>
-
-    <!-- ══════════════════════ ACESSIBILIDADE NA PISCINA ══════════════════════ -->
-    <section class="section section--pool" id="acessibilidade" aria-labelledby="accTitle">
-      <div class="container">
-
-        <header class="sec-head reveal">
-          <p class="kicker mono">04 · ACESSIBILIDADE NA PISCINA TÉRMICA</p>
-          <h2 id="accTitle"><span class="uline">Uma piscina para todos</span> os corpos e olhares</h2>
-          <p class="sec-head__lead">
-            Aquecer de forma sustentável só faz sentido se a piscina for de fato acessível. O AquaSol
-            considera o acesso físico e o acesso sensorial — e a óptica que estudamos orienta a
-            sinalização visual inclusiva.
-          </p>
-        </header>
-
-        <div class="acc-grid">
-          <figure class="fig acc-fig reveal">
-            <img src="https://picsum.photos/seed/piscina-acessivel/860/720" width="860" height="720" loading="lazy"
-                 alt="Fotografia ilustrativa de uma piscina térmica com rampa de acesso submersa, barras de apoio laterais e piso antiderrapante ao redor.">
-            <figcaption>Acesso submerso gradual e barras de apoio garantem autonomia na entrada da água. <span class="mono">(imagem ilustrativa)</span></figcaption>
-          </figure>
-
-          <div class="acc-cards">
-            <article class="acc-card reveal">
-              <h3>🏊 Acesso físico com autonomia</h3>
-              <p>Escada submersa com corrimão duplo, barras de apoio, piso antiderrapante e cadeira de
-              transferência permitem que pessoas com deficiência física ou mobilidade reduzida entrem
-              na água com segurança e independência.</p>
-            </article>
-
-            <article class="acc-card reveal" style="--d:.08s">
-              <h3>🌡️ Conforto térmico é saúde</h3>
-              <p>Para hidroterapia e reabilitação, a constância entre <strong>28 e 32 °C</strong> é
-              requisito terapêutico, não luxo. A automação mantém a faixa ideal continuamente —
-              inclusive para pessoas com sensibilidade térmica reduzida.</p>
-            </article>
-
-            <article class="acc-card reveal" style="--d:.16s">
-              <h3>🎨 Sinalização guiada pela óptica</h3>
-              <p>Ao estudar dispersão — no prisma, no Disco de Newton e na difração do CD — entendemos
-              que cor é percepção. Por isso a sinalização usa <strong>contraste de luminosidade</strong>,
-              e não apenas matiz: legível para baixa visão e daltonismo. Superfícies foscas trocam a
-              reflexão especular pela difusa, eliminando o ofuscamento.</p>
-            </article>
-
-            <article class="acc-card reveal" style="--d:.24s">
-              <h3>♿ Comunicação acessível</h3>
-              <p>Este próprio site aplica os princípios: HTML semântico, contraste de cores em nível AA,
-              textos alternativos descritivos, navegação por teclado e respeito à preferência de
-              movimento reduzido do usuário.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ══════════════════════ RODAPÉ / EQUIPE ══════════════════════ -->
-  <footer class="footer" id="equipe" aria-labelledby="teamTitle">
-    <div class="wave-div wave-div--footer" aria-hidden="true">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0 34 C 240 66 420 10 640 42 C 860 74 1060 18 1260 46 C 1360 58 1410 44 1440 40 L1440 80 L0 80 Z" fill="var(--ink-2)"/></svg>
-    </div>
-
-    <div class="container">
-
-      <header class="sec-head reveal">
-        <p class="kicker kicker--solar mono">05 · EQUIPE &amp; SUSTENTABILIDADE</p>
-        <h2 id="teamTitle"><span class="uline uline--solar">Quem constrói o AquaSol</span></h2>
-      </header>
-
-      <!-- Estudantes -->
-      <div class="team-block reveal">
-        <h3 class="team-sub mono">ESTUDANTES</h3>
-        <ul class="team">
-          <li class="team__card">
-            <img src="https://picsum.photos/seed/leonardo-menegazzo/200/200" width="80" height="80" loading="lazy"
-                 alt="Retrato ilustrativo de Leonardo Menegazzo, estudante integrante da equipe.">
-            <h3>Leonardo Menegazzo</h3>
-            <p>Estudante · Projeto Integrador</p>
-          </li>
-          <li class="team__card" style="--d:.08s">
-            <img src="https://picsum.photos/seed/leonardo-bonfim/200/200" width="80" height="80" loading="lazy"
-                 alt="Retrato ilustrativo de Leonardo Bonfim, estudante integrante da equipe.">
-            <h3>Leonardo Bonfim</h3>
-            <p>Estudante · Projeto Integrador</p>
-          </li>
-          <li class="team__card" style="--d:.16s">
-            <img src="https://picsum.photos/seed/eduardo-integrante/200/200" width="80" height="80" loading="lazy"
-                 alt="Retrato ilustrativo de Eduardo, estudante integrante da equipe.">
-            <h3>Eduardo</h3>
-            <p>Estudante · Projeto Integrador</p>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Professores orientadores -->
-      <div class="team-block reveal">
-        <h3 class="team-sub mono">PROFESSORES ORIENTADORES</h3>
-        <ul class="team">
-          <li class="team__card team__card--advisor">
-            <img src="https://picsum.photos/seed/prof-matheus-robotica/200/200" width="80" height="80" loading="lazy"
-                 alt="Retrato ilustrativo do Professor Matheus, orientador da área de Robótica.">
-            <h3>Prof. Matheus</h3>
-            <p>Robótica</p>
-          </li>
-          <li class="team__card team__card--advisor" style="--d:.08s">
-            <img src="https://picsum.photos/seed/prof-angelo-programacao/200/200" width="80" height="80" loading="lazy"
-                 alt="Retrato ilustrativo do Professor Ângelo, orientador da área de Programação.">
-            <h3>Prof. Ângelo</h3>
-            <p>Programação</p>
-          </li>
-          <li class="team__card team__card--advisor" style="--d:.16s">
-            <img src="https://picsum.photos/seed/prof-paulo-fisica/200/200" width="80" height="80" loading="lazy"
-                 alt="Retrato ilustrativo do Professor Paulo, orientador das áreas de Física e Tecnociência.">
-            <h3>Prof. Paulo</h3>
-            <p>Física &amp; Tecnociência</p>
-          </li>
-        </ul>
-      </div>
-
-      <div class="footer__sus reveal">
-        <div class="footer__sus-txt">
-          <h3>Nosso compromisso com o futuro</h3>
-          <p>
-            O AquaSol dialoga diretamente com a <strong>Agenda 2030 da ONU</strong>: ao substituir o
-            aquecimento elétrico por energia solar e automatizar o consumo, o projeto reduz custos
-            operacionais, emissões de carbono e amplia o acesso da comunidade escolar a uma piscina
-            aquecida, acessível e segura — tecnologia com propósito social.
-          </p>
-        </div>
-        <ul class="sdg" aria-label="Objetivos de Desenvolvimento Sustentável relacionados ao projeto">
-          <li class="sdg__chip sdg__chip--7"><strong>ODS 7</strong>Energia limpa e acessível</li>
-          <li class="sdg__chip sdg__chip--13"><strong>ODS 13</strong>Ação contra a mudança do clima</li>
-        </ul>
-      </div>
-
-      <nav class="footer__nav" aria-label="Navegação do rodapé">
-        <a href="#inicio">Início</a>
-        <a href="#tecnociencia">Tecnociência</a>
-        <a href="#robotica">Robótica</a>
-        <a href="#simulador">Simulador</a>
-        <a href="#acessibilidade">Acessibilidade</a>
-        <a href="#inicio" id="backTop">↑ Voltar ao topo</a>
-      </nav>
-
-      <div class="footer__bottom">
-        <p><strong>CEP</strong> — Projeto Integrador · <span id="year">2025</span>. Feito por Leonardo Menegazzo, Leonardo Bonfim e Eduardo, com orientação dos professores Matheus, Ângelo e Paulo. ☀️💧</p>
-        <p class="mono">AquaSol · ciência, código e cuidado com a água.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+/* ═══════════════════════════════════════════════════════════
+   AquaSol CEP — Projeto Integrador
+   Temas claro/noturno via variáveis · Mobile-first · A11y
+   ═══════════════════════════════════════════════════════════ */
+
+:root{
+  color-scheme:light;
+
+  /* Paleta fixa (não muda com o tema) */
+  --ink:      #05131D;
+  --ink-2:    #0A2233;
+  --ink-3:    #10324A;
+  --aqua:     #56E1D4;
+  --aqua-dp:  #157A8C;
+  --solar:    #FFB531;
+  --solar-dp: #F2891B;
+  --hot:      #FF6B4A;
+  --txt-l:    #E8F3F2;
+  --mut-l:    #ACC8CF;
+  --line-d:   #1C4258;
+
+  /* Paleta adaptável (modo claro por padrão) */
+  --paper:    #F0F5F4;
+  --paper-2:  #FFFFFF;
+  --pool:     #E6F1EF;
+  --line-l:   #D3E2DF;
+  --txt-d:    #10303F;
+  --mut-d:    #3E5E6D;
+  --prose:    #27485A;
+
+  /* Tipografia */
+  --f-display:'Space Grotesk', 'Segoe UI', sans-serif;
+  --f-body:'IBM Plex Sans', system-ui, sans-serif;
+  --f-mono:'IBM Plex Mono', 'Courier New', monospace;
+
+  /* Traços */
+  --spectrum: linear-gradient(90deg,#7A2FF2,#2F6BFF,#2FD4B7,#3FCF2C,#FFD400,#FF8A00,#FF3D2E);
+  --nav-h: 72px;
+  --radius: 14px;
+}
+
+/* ── TEMA NOTURNO: redefinimos apenas as variáveis adaptáveis ── */
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:   #081D2B;
+  --paper-2: #0E2A3C;
+  --pool:    #0A2531;
+  --line-l:  #1C4258;
+  --txt-d:   #E8F3F2;
+  --mut-d:   #ACC8CF;
+  --prose:   #C3DAD8;
+}
+
+/* ── Reset & base ─────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* Sem overflow horizontal (espaço branco à direita) */
+html,body{overflow-x:hidden;overflow-x:clip}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--f-body);
+  font-size:1.0625rem;line-height:1.7;
+  color:var(--txt-d);background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  transition:background-color .3s ease,color .3s ease;
+}
+img,svg{max-width:100%;height:auto}
+img{display:block}
+ul{list-style:none}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+::selection{background:var(--solar);color:#241300}
+
+/* Foco visível forte (A11y) */
+:focus-visible{outline:3px solid var(--solar);outline-offset:3px;border-radius:4px}
+.section--paper :focus-visible,
+.section--pool :focus-visible{outline-color:var(--aqua-dp)}
+html[data-theme="dark"] .section--paper :focus-visible,
+html[data-theme="dark"] .section--pool :focus-visible{outline-color:var(--aqua)}
+
+/* Grão sutil sobre tudo */
+.noise{
+  position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* Barra de progresso de leitura */
+.progress{
+  position:fixed;top:0;left:0;height:4px;width:0;z-index:70;
+  background:var(--spectrum);
+}
+
+/* Utilitários */
+.container{width:min(1180px, 100% - 2.5rem);margin-inline:auto}
+.mono{font-family:var(--f-mono);letter-spacing:.02em}
+.visually-hidden{
+  position:absolute!important;width:1px;height:1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0;margin:-1px;
+}
+[id]{scroll-margin-top:calc(var(--nav-h) + 18px)}
+
+.skip-link{
+  position:absolute;left:1rem;top:-4rem;z-index:100;
+  background:var(--solar);color:#241300;font-weight:600;
+  padding:.7rem 1.2rem;border-radius:0 0 10px 10px;
+  transition:top .25s ease;text-decoration:none;
+}
+.skip-link:focus{top:0}
+
+/* ── Botões ───────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.85rem 1.5rem;border-radius:999px;border:2px solid transparent;
+  font-weight:600;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn--primary{
+  background:linear-gradient(135deg,var(--solar),var(--solar-dp));
+  color:#241300;box-shadow:0 6px 20px rgba(242,137,27,.35);
+}
+.btn--primary:hover{box-shadow:0 10px 26px rgba(242,137,27,.45)}
+.btn--primary[aria-pressed="true"]{background:linear-gradient(135deg,#2A6F7F,#174C5C);color:#EAFBFF}
+.btn--ghost{border-color:var(--aqua);color:var(--txt-l)}
+.section--paper .btn--ghost,
+.section--pool .btn--ghost{border-color:var(--aqua-dp);color:var(--txt-d)}
+html[data-theme="dark"] .section--paper .btn--ghost,
+html[data-theme="dark"] .section--pool .btn--ghost{border-color:var(--aqua)}
+.btn--dark{background:var(--ink-2);color:var(--txt-l);border-color:var(--line-d)}
+html[data-theme="dark"] .btn--dark{background:#12374D;border-color:#2C5A75}
+.btn--small{padding:.55rem 1.1rem;font-size:.92rem}
+.btn--xl{padding:1.05rem 2rem;font-size:1.1rem;width:100%;justify-content:center}
+
+/* ── Cabeçalho ────────────────────────────────────────────── */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(5,19,29,.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(86,225,212,.15);
+  transition:box-shadow .3s ease;
+}
+.topbar.is-scrolled{box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.topbar__inner{display:flex;align-items:center;justify-content:space-between;min-height:var(--nav-h);position:relative}
+.topbar__actions{display:flex;align-items:center;gap:.6rem}
+
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.brand__mark{width:40px;height:40px}
+.brand__txt{font-family:var(--f-display);font-weight:700;font-size:1.25rem;color:var(--txt-l)}
+.brand__txt em{font-style:normal;color:var(--aqua);margin-left:.3rem}
+
+.nav-toggle{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:none;border:2px solid var(--line-d);color:var(--txt-l);
+  padding:.5rem .95rem;border-radius:10px;font-weight:600;
+}
+.nav-toggle__bars{display:inline-flex;flex-direction:column;gap:4px}
+.nav-toggle__bars span{width:20px;height:2px;background:var(--aqua);border-radius:2px;transition:transform .3s ease,opacity .3s ease}
+.topbar.menu-open .nav-toggle__bars span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.topbar.menu-open .nav-toggle__bars span:nth-child(2){opacity:0}
+.topbar.menu-open .nav-toggle__bars span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+.menu{
+  position:absolute;top:100%;left:0;right:0;
+  display:none;flex-direction:column;gap:.2rem;
+  background:var(--ink-2);border-bottom:1px solid var(--line-d);
+  padding:.8rem 1.4rem 1.2rem;
+}
+.topbar.menu-open .menu{display:flex;animation:menuIn .28s ease}
+@keyframes menuIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+.menu a{
+  display:block;padding:.7rem .6rem;text-decoration:none;color:var(--mut-l);
+  font-weight:500;border-radius:8px;position:relative;transition:color .2s ease;
+}
+.menu a:hover{color:var(--txt-l);background:rgba(86,225,212,.08)}
+.menu a.is-active{color:var(--aqua)}
+.menu a.is-active::after{
+  content:"";position:absolute;left:.6rem;right:.6rem;bottom:.25rem;height:2px;
+  background:var(--spectrum);border-radius:2px;
+}
+
+/* Botão de tema — SEMPRE visível ao lado do Menu */
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.5rem .85rem;border-radius:999px;flex:none;
+  background:var(--ink-3);border:1px solid var(--line-d);color:var(--txt-l);
+  font-weight:600;font-size:.85rem;
+  transition:border-color .2s ease,background .2s ease;
+}
+.theme-toggle:hover{border-color:var(--solar)}
+.theme-toggle[aria-pressed="true"]{background:#12374D;border-color:var(--solar)}
+.theme-toggle__icon{font-size:1.05rem;line-height:1}
+
+/* No celular, mostra só o ícone (o texto fica disponível p/ leitor de tela) */
+@media (max-width: 919px){
+  .theme-toggle__txt{
+    position:absolute!important;width:1px;height:1px;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap;
+  }
+}
+
+/* ── Hero ─────────────────────────────────────────────────── */
+.hero{
+  background:
+    radial-gradient(900px 500px at 15% -10%, rgba(255,181,49,.14), transparent 60%),
+    radial-gradient(800px 500px at 95% 20%, rgba(86,225,212,.1), transparent 55%),
+    var(--ink);
+  color:var(--txt-l);
+  padding:calc(var(--nav-h) + 2.5rem) 0 0;
+  overflow:hidden;
+}
+.hero__grid{display:grid;gap:3rem;padding-bottom:3.5rem}
+
+.hero__kicker{color:var(--solar);font-size:.85rem;margin-bottom:1.2rem;min-height:1.3em}
+.hero__title{
+  font-family:var(--f-display);font-weight:700;
+  font-size:clamp(2.1rem, 5.5vw, 3.9rem);
+  line-height:1.08;letter-spacing:-.02em;margin-bottom:1.4rem;
+}
+.hero__title em{font-style:normal;color:var(--aqua)}
+.hero__title em:last-child{color:var(--solar)}
+.line{display:block;overflow:hidden;padding-bottom:.08em}
+.line > span{display:block;transform:translateY(115%);transition:transform .9s cubic-bezier(.2,.7,.15,1);transition-delay:var(--ld,0s)}
+body.loaded .line > span{transform:none}
+
+.hero__lead{color:var(--mut-l);max-width:56ch;margin-bottom:2rem}
+.hero__lead strong{color:var(--txt-l)}
+.hero__cta{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.8rem}
+.hero__chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.hero__chips li{
+  font-size:.88rem;padding:.45rem .95rem;border-radius:999px;
+  border:1px solid var(--line-d);background:rgba(16,50,74,.5);color:var(--txt-l);
+}
+
+/* Cena SVG animada */
+.hero__scene{position:relative;max-width:560px;margin-inline:auto;width:100%}
+.hero__scene svg{width:100%;height:auto}
+.rays{transform-origin:83px 86px;animation:spin 42s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.beams line{animation:dashMove 1.4s linear infinite}
+@keyframes dashMove{to{stroke-dashoffset:-14}}
+.wave{animation:waveX 6s ease-in-out infinite alternate}
+.w2{animation-duration:8s;animation-delay:-2s}
+@keyframes waveX{from{transform:translateX(-14px)}to{transform:translateX(14px)}}
+.dot{animation:bub 3.6s ease-in infinite}
+.d2{animation-delay:1.1s}.d3{animation-delay:2.2s}
+@keyframes bub{0%{transform:translateY(0);opacity:0}20%{opacity:.9}100%{transform:translateY(-62px);opacity:0}}
+.warmBadge{animation:floaty 4s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+.float-card{
+  position:absolute;background:var(--ink-2);border:1px solid var(--line-d);
+  border-radius:12px;padding:.7rem 1rem;font-size:.85rem;color:var(--txt-l);
+  box-shadow:0 12px 30px rgba(0,0,0,.35);display:flex;flex-direction:column;gap:.1rem;
+  animation:floaty 5s ease-in-out infinite;max-width:200px;
+}
+.float-card span{color:var(--mut-l);font-size:.75rem}
+.float-card--a{top:2%;right:0}
+.float-card--b{bottom:6%;left:0;animation-delay:-2.5s}
+
+/* Indicadores */
+.stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-d);
+  border:1px solid var(--line-d);border-radius:var(--radius);overflow:hidden;
+  margin-bottom:3rem;
+}
+.stat{background:var(--ink-2);padding:1.3rem 1.2rem}
+.stat dd{font-family:var(--f-display);font-weight:700;font-size:clamp(1.5rem,3vw,2.1rem);color:var(--solar)}
+.stat dt{font-size:.85rem;color:var(--mut-l)}
+
+/* Letreiro */
+.marquee{border-block:1px solid var(--line-d);overflow:hidden;background:rgba(10,34,51,.6)}
+.marquee__track{display:flex;width:max-content;animation:marquee 26s linear infinite}
+.marquee__track span{
+  white-space:nowrap;padding:.7rem 0;color:var(--mut-l);
+  font-family:var(--f-mono);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;
+}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ── Ondas divisórias ─────────────────────────────────────── */
+.wave-div{line-height:0;margin-top:-1px}
+.wave-div svg{width:100%;height:56px;display:block}
+.wave-div--paper{background:var(--ink)}
+.wave-div--ink{background:var(--paper)}
+
+/* ── Seções genéricas ─────────────────────────────────────── */
+.section{padding:4.5rem 0 5rem}
+.section--paper{background:var(--paper)}
+.section--ink{background:var(--ink);color:var(--txt-l)}
+.section--pool{background:var(--pool)}
+.section--paper,.section--pool{transition:background-color .3s ease}
+
+.sec-head{max-width:760px;margin-bottom:3rem}
+.kicker{
+  display:inline-flex;align-items:center;gap:.6rem;font-size:.82rem;
+  color:var(--aqua-dp);font-weight:500;margin-bottom:1rem;
+}
+.kicker::before{content:"";width:34px;height:4px;border-radius:2px;background:var(--spectrum)}
+.kicker--solar{color:var(--solar)}
+.section--ink .kicker{color:var(--aqua)}
+html[data-theme="dark"] .kicker:not(.kicker--solar){color:var(--aqua)}
+
+.sec-head h2{
+  font-family:var(--f-display);font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(1.8rem,4.2vw,2.8rem);line-height:1.15;margin-bottom:1rem;
+}
+.uline{background:linear-gradient(transparent 68%, rgba(86,225,212,.45) 0)}
+.uline--solar{background:linear-gradient(transparent 68%, rgba(255,181,49,.5) 0)}
+.sec-head__lead{color:var(--mut-d);font-size:1.1rem}
+.section--ink .sec-head__lead{color:var(--mut-l)}
+
+/* ── Tecnociência ─────────────────────────────────────────── */
+.tec-grid{display:grid;gap:2.5rem;margin-bottom:3.5rem}
+.tec-text h3{font-family:var(--f-display);font-size:1.3rem;margin:2rem 0 .8rem;color:var(--txt-d)}
+.tec-text h3:first-child{margin-top:0}
+.tec-text p{margin-bottom:1.1rem;color:var(--prose);max-width:68ch}
+
+.fig{margin-top:2rem}
+.fig img{border-radius:var(--radius);border:1px solid var(--line-l)}
+.fig figcaption{font-size:.85rem;color:var(--mut-d);margin-top:.6rem}
+
+.tec-side{display:grid;gap:1.5rem;align-content:start}
+.tec-side > *{background:var(--paper-2);border:1px solid var(--line-l);border-radius:var(--radius);padding:1.4rem}
+
+.spectrum{
+  height:34px;border-radius:8px;background:var(--spectrum);
+  position:relative;margin-bottom:.9rem;
+}
+.spectrum span{
+  position:absolute;bottom:-1.4rem;font-size:.72rem;color:var(--mut-d);
+  font-family:var(--f-mono);
+}
+.spectrum-card figcaption{font-size:.9rem;color:var(--mut-d);margin-top:1.6rem}
+
+.disc-card h3,.pin-card h3,.cd-card h3{font-family:var(--f-display);font-size:1.1rem;margin-bottom:1rem}
+.disc-wrap{display:flex;justify-content:center;margin-bottom:1rem}
+.newton-disc{
+  width:150px;height:150px;border-radius:50%;
+  background:conic-gradient(#E63946,#F77F00,#FCBF49,#80B918,#2A9D8F,#4361EE,#7209B7,#E63946);
+  border:6px solid var(--ink);position:relative;
+}
+.newton-disc::after{
+  content:"";position:absolute;inset:0;margin:auto;width:22px;height:22px;
+  border-radius:50%;background:var(--ink);
+}
+.newton-disc.spinning{animation:spin .35s linear infinite}
+.disc-card .btn,.cd-card .btn{width:100%;justify-content:center}
+.disc-cap{font-size:.82rem;color:var(--mut-d);margin-top:.8rem;min-height:2.4em}
+
+.pinhole{width:100%;height:auto;margin-bottom:.8rem;border-radius:8px}
+.pin-card p{font-size:.92rem;color:var(--mut-d)}
+
+/* Demonstração: rede de difração (CD) */
+.cd-lab{
+  position:relative;height:190px;border-radius:10px;overflow:hidden;
+  background:linear-gradient(160deg,#04101A,#0A2233);margin-bottom:1rem;
+}
+.cd-lab__beam{
+  position:absolute;top:50%;left:0;width:36%;height:3px;
+  background:linear-gradient(90deg,rgba(243,247,246,0),#F3F7F6);
+  transform:translateY(-50%);
+}
+.cd-lab__disc{
+  position:absolute;top:50%;left:36%;width:62px;height:62px;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:conic-gradient(from 25deg,#D7DEE4,#93A3B1,#EDF2F5,#AEBBC6,#D7DEE4);
+  border:3px solid #0E2A3C;box-shadow:0 0 20px rgba(86,225,212,.3);
+}
+.cd-lab__disc::after{
+  content:"";position:absolute;inset:0;margin:auto;width:14px;height:14px;
+  border-radius:50%;background:#0A2233;
+}
+.cd-lab__rays{position:absolute;inset:0}
+.cd-lab__rays i{
+  position:absolute;top:calc(50% - 1.5px);left:36%;width:60%;height:3px;border-radius:2px;
+  transform-origin:left center;transform:rotate(0deg);opacity:0;
+  transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .45s ease;
+  transition-delay:calc(var(--i)*.07s);
+}
+.cd-lab__rays i:nth-child(1){background:#7A2FF2;--ang:-8deg; --i:0}
+.cd-lab__rays i:nth-child(2){background:#2F6BFF;--ang:-15deg;--i:1}
+.cd-lab__rays i:nth-child(3){background:#2FD4B7;--ang:-22deg;--i:2}
+.cd-lab__rays i:nth-child(4){background:#FFD400;--ang:-29deg;--i:3}
+.cd-lab__rays i:nth-child(5){background:#FF8A00;--ang:-36deg;--i:4}
+.cd-lab__rays i:nth-child(6){background:#FF3D2E;--ang:-43deg;--i:5}
+.cd-lab.diffracting .cd-lab__rays i{transform:rotate(var(--ang));opacity:.95}
+.cd-lab.diffracting .cd-lab__disc{box-shadow:0 0 26px rgba(255,181,49,.4)}
+
+/* Princípios */
+.principles{display:grid;gap:1.2rem}
+.principle{
+  background:var(--paper-2);border:1px solid var(--line-l);border-left:6px solid var(--aqua);
+  border-radius:var(--radius);padding:1.5rem;transition:transform .25s ease,box-shadow .25s ease;
+}
+.principle:nth-child(2){border-left-color:var(--solar)}
+.principle:nth-child(3){border-left-color:var(--hot)}
+.principle:nth-child(4){border-left-color:#7A2FF2}
+.principle:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(16,48,63,.12)}
+.principle__icon{font-size:1.6rem;display:block;margin-bottom:.6rem}
+.principle h3{font-family:var(--f-display);font-size:1.12rem;margin-bottom:.5rem}
+.principle p{font-size:.95rem;color:var(--mut-d)}
+
+/* ── Robótica ─────────────────────────────────────────────── */
+.rob-grid{display:grid;gap:2rem}
+
+/* Antivazamento: itens de grid precisam poder encolher */
+.hero__copy,.hero__scene,.tec-text,.tec-side,
+.rob-steps,.rob-sticky,.step,.step > div,
+.sim-controls,.sim-stage,.acc-fig,.acc-cards{min-width:0}
+
+.tele{
+  background:var(--ink-2);border:1px solid var(--line-d);border-radius:var(--radius);
+  padding:1.4rem;margin-bottom:1.2rem;
+}
+.tele__head{display:flex;align-items:center;gap:.6rem;color:var(--aqua);font-size:.8rem;margin-bottom:1.2rem}
+.tele__dot{width:9px;height:9px;border-radius:50%;background:var(--hot);animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+.tele__grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.tele__grid dt{font-size:.72rem;color:var(--mut-l);text-transform:uppercase;letter-spacing:.1em}
+.tele__grid dd{font-size:1.25rem;color:var(--txt-l)}
+.tele__bars{display:flex;align-items:flex-end;gap:5px;height:52px;margin-top:1.2rem}
+.tele__bars i{flex:1;height:var(--h);background:linear-gradient(to top,var(--aqua-dp),var(--aqua));border-radius:3px 3px 0 0;animation:pulseBar 2.6s ease-in-out infinite alternate}
+.tele__bars i:nth-child(odd){animation-delay:-1.3s}
+@keyframes pulseBar{from{transform:scaleY(.75)}to{transform:scaleY(1)}}
+
+.flow{background:var(--ink-2);border:1px solid var(--line-d);border-radius:var(--radius);padding:1.2rem}
+.flow__title{color:var(--mut-l);font-size:.72rem;letter-spacing:.14em;margin-bottom:1rem}
+.flow__row{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem}
+.flow__chip{padding:.45rem .8rem;border-radius:999px;font-size:.85rem;font-weight:600}
+.flow__chip--s{background:rgba(86,225,212,.15);color:var(--aqua)}
+.flow__chip--c{background:rgba(255,181,49,.15);color:var(--solar)}
+.flow__chip--a{background:rgba(255,107,74,.15);color:#FF9C85}
+.flow__arrow{width:44px;color:var(--mut-l)}
+.dashline{stroke-dasharray:5 5;animation:dashMove 1.2s linear infinite}
+
+.step{
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:1rem;
+  background:rgba(16,50,74,.45);border:1px solid var(--line-d);
+  border-radius:var(--radius);padding:1.4rem;margin-bottom:1.2rem;
+  max-width:100%;
+}
+.step__num{
+  font-family:var(--f-display);font-weight:700;font-size:1.9rem;color:transparent;
+  -webkit-text-stroke:1.5px var(--solar);line-height:1;
+}
+.step h3{font-family:var(--f-display);font-size:1.2rem;margin-bottom:.6rem;color:var(--txt-l)}
+.step p{color:var(--mut-l);font-size:.98rem}
+.step p strong{color:var(--txt-l)}
+
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.tags li{
+  font-size:.78rem;padding:.3rem .7rem;border-radius:6px;
+  background:rgba(86,225,212,.12);color:var(--aqua);border:1px solid rgba(86,225,212,.3);
+}
+
+.code{
+  margin-top:1rem;padding:1.1rem;background:#04101A;border:1px solid var(--line-d);
+  border-radius:10px;overflow-x:auto;max-width:100%;
+  font-size:.84rem;line-height:1.7;color:#BFE3E0;
+}
+.code code{font-family:var(--f-mono)}
+
+.section--ink .fig img{border-color:var(--line-d)}
+.section--ink .fig figcaption{color:var(--mut-l)}
+/* Imagem da bancada com largura reduzida */
+.fig--compact{max-width:620px}
+
+/* ── Simulador ────────────────────────────────────────────── */
+.sim-grid{display:grid;gap:2.5rem}
+
+.sim-controls{
+  background:var(--paper-2);border:1px solid var(--line-l);border-radius:var(--radius);
+  padding:1.8rem;display:grid;gap:1.3rem;align-content:start;
+}
+
+.switch{display:flex;align-items:center;gap:.8rem;cursor:pointer;font-weight:500}
+.switch small{color:var(--mut-d);font-weight:400;display:block}
+.switch input{position:absolute;opacity:0;width:1px;height:1px}
+.switch__track{
+  flex:none;width:52px;height:28px;border-radius:999px;background:#C7D8D5;
+  position:relative;transition:background .25s ease;
+}
+.switch__track::after{
+  content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;
+  background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:transform .25s ease;
+}
+.switch input:checked + .switch__track{background:var(--aqua-dp)}
+.switch input:checked + .switch__track::after{transform:translateX(24px)}
+.switch input:focus-visible + .switch__track{outline:3px solid var(--aqua-dp);outline-offset:3px}
+html[data-theme="dark"] .switch__track{background:#2E4E60}
+
+.sim-readout{background:var(--ink);border-radius:12px;padding:1.3rem 1.5rem;color:var(--txt-l)}
+.sim-readout__label{font-size:.72rem;color:var(--mut-l);letter-spacing:.14em}
+.sim-readout__value{font-size:3rem;font-weight:500;color:var(--solar);line-height:1.1}
+.sim-readout__value .unit{font-size:1.4rem;margin-left:.3rem;color:var(--mut-l)}
+.sim-readout__state{font-size:.9rem;margin-top:.4rem}
+.sim-readout__state[data-state="off"]{color:var(--mut-l)}
+.sim-readout__state[data-state="on"]{color:var(--solar)}
+.sim-readout__state[data-state="done"]{color:var(--aqua)}
+
+.sim-status{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.sim-status > div{background:var(--paper);border:1px solid var(--line-l);border-radius:10px;padding:.7rem .9rem}
+.sim-status dt{font-size:.7rem;color:var(--mut-d);text-transform:uppercase;letter-spacing:.08em}
+.sim-status dd{font-size:1rem;font-weight:500;color:var(--txt-d)}
+
+/* Palco da simulação */
+.sim-stage{background:var(--paper-2);border:1px solid var(--line-l);border-radius:var(--radius);padding:1.4rem}
+.stage{
+  position:relative;aspect-ratio:4/3.1;border-radius:12px;overflow:hidden;
+  background:linear-gradient(#DFF3F5 0%, #BEE4E8 62%, #BEE4E8 100%);
+  border:1px solid var(--line-l);
+}
+.stage__sky{position:absolute;inset:0 0 40% 0}
+.sun{position:absolute;top:8%;left:8%;width:70px;height:70px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, #FFE28A, var(--solar));
+  box-shadow:0 0 0 rgba(255,181,49,0);transition:box-shadow .6s ease;
+}
+.sun__rays{
+  position:absolute;inset:-24px;border-radius:50%;opacity:0;transition:opacity .6s ease;
+  background:repeating-conic-gradient(rgba(255,181,49,.55) 0deg 7deg, transparent 7deg 30deg);
+  -webkit-mask:radial-gradient(circle, transparent 52%, #000 53%);
+          mask:radial-gradient(circle, transparent 52%, #000 53%);
+}
+.stage[data-state="on"] .sun{box-shadow:0 0 46px 12px rgba(255,181,49,.55)}
+.stage[data-state="on"] .sun__rays{opacity:1;animation:spin 22s linear infinite}
+
+.cloud{
+  position:absolute;top:12%;left:6%;width:120px;height:34px;border-radius:999px;
+  background:#fff;opacity:0;transform:translateX(-40px);transition:.6s ease;
+}
+.cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.cloud::before{width:52px;height:52px;top:-26px;left:16px}
+.cloud::after{width:38px;height:38px;top:-18px;left:62px}
+.stage[data-cloudy="true"] .cloud{opacity:.95;transform:none}
+.stage[data-cloudy="true"] .sun{filter:grayscale(.35) brightness(.9)}
+
+.stage__panel{
+  position:absolute;top:33%;left:30%;width:44%;height:17%;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 13%, rgba(86,225,212,.28) 13% 14%),
+    repeating-linear-gradient(0deg, transparent 0 44%, rgba(86,225,212,.28) 44% 50%),
+    linear-gradient(135deg, #12324A, #0A1E2C);
+  border:2px solid #1E5A75;border-radius:6px;
+  transform:perspective(500px) rotateX(22deg) rotate(-3deg);
+  display:flex;align-items:flex-end;justify-content:center;
+}
+.stage__panel span{
+  font-family:var(--f-mono);font-size:.65rem;color:#7FB6CC;
+  letter-spacing:.2em;text-transform:uppercase;padding:.2rem .6rem;
+}
+
+.stage__heat{position:absolute;top:47%;left:44%;display:none}
+.stage[data-state="on"] .stage__heat{display:block}
+.stage__heat i{
+  position:absolute;width:8px;height:8px;border-radius:50%;background:var(--hot);
+  animation:heatUp 2.2s ease-in infinite;
+}
+.stage__heat i:nth-child(2){left:26px;animation-delay:.7s}
+.stage__heat i:nth-child(3){left:-22px;animation-delay:1.4s}
+@keyframes heatUp{0%{transform:translateY(0);opacity:0}25%{opacity:.9}100%{transform:translateY(90px);opacity:0}}
+
+.stage__pool{position:absolute;left:0;right:0;bottom:0;height:38%;
+  background:linear-gradient(var(--water-top,#1E7F9C), var(--water-bot,#0C4460));
+}
+.stage__pool::after{
+  content:"";position:absolute;inset:0;opacity:var(--warmth,0);transition:opacity .4s linear;
+  background:linear-gradient(#2FA4B8, #B65C2E);
+}
+.stage__waves{
+  position:absolute;top:-9px;left:0;width:200%;height:18px;z-index:2;
+  background:radial-gradient(circle 12px at 12px 18px, rgba(255,255,255,.5) 10px, transparent 11px);
+  background-size:26px 18px;animation:waveSlide 5s linear infinite;
+}
+@keyframes waveSlide{to{transform:translateX(-26px)}}
+
+.bubble{position:absolute;bottom:8%;width:9px;height:9px;border-radius:50%;
+  background:rgba(255,255,255,.55);z-index:3;display:none;
+}
+.stage[data-state="on"] .bubble{display:block;animation:bubUp 3s ease-in infinite}
+.b1{left:20%}.b2{left:45%;animation-delay:.9s}.b3{left:68%;animation-delay:1.7s}.b4{left:84%;animation-delay:2.4s}
+@keyframes bubUp{0%{transform:translateY(0) scale(.7);opacity:0}20%{opacity:.9}100%{transform:translateY(-120px) scale(1.15);opacity:0}}
+
+/* Termômetro */
+.thermo{position:absolute;right:5%;bottom:6%;height:74%;display:flex;flex-direction:column;align-items:center;z-index:4}
+.thermo__scale{display:flex;flex-direction:column;justify-content:space-between;height:100%;position:absolute;right:calc(100% + 6px);font-size:.6rem;color:#27485A}
+.thermo__tube{
+  width:16px;flex:1;background:rgba(255,255,255,.85);border:2px solid #27485A;
+  border-radius:10px;display:flex;align-items:flex-end;overflow:hidden;
+}
+.thermo__fill{
+  width:100%;height:10%;border-radius:8px 8px 0 0;
+  background:linear-gradient(to top, var(--hot), var(--solar), var(--aqua));
+  transition:height .25s linear;
+}
+.thermo__bulb{width:30px;height:30px;border-radius:50%;background:var(--hot);border:2px solid #27485A;margin-top:-6px}
+
+.sim-caption{font-size:.78rem;color:var(--mut-d);margin-top:1rem;text-align:center}
+
+/* ── Acessibilidade na piscina ────────────────────────────── */
+.acc-grid{display:grid;gap:2.2rem}
+.acc-fig img{border-radius:var(--radius);border:1px solid var(--line-l)}
+.acc-cards{display:grid;gap:1.1rem}
+.acc-card{
+  background:var(--paper-2);border:1px solid var(--line-l);border-top:5px solid var(--aqua-dp);
+  border-radius:var(--radius);padding:1.4rem;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.acc-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(16,48,63,.12)}
+.acc-card:nth-child(2){border-top-color:var(--solar)}
+.acc-card:nth-child(3){border-top-color:var(--hot)}
+.acc-card:nth-child(4){border-top-color:#7A2FF2}
+.acc-card h3{font-family:var(--f-display);font-size:1.08rem;margin-bottom:.5rem}
+.acc-card p{font-size:.95rem;color:var(--mut-d)}
+.acc-card p strong{color:var(--txt-d)}
+
+/* ── Rodapé ───────────────────────────────────────────────── */
+.footer{background:var(--ink-2);color:var(--txt-l);padding-bottom:2.5rem}
+.wave-div--footer{background:var(--pool)}
+
+.team-block{margin-bottom:2.4rem}
+.team-sub{
+  font-family:var(--f-mono);font-size:.78rem;letter-spacing:.22em;
+  color:var(--solar);margin-bottom:1.1rem;
+}
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.team__card{
+  background:var(--ink-3);border:1px solid var(--line-d);border-radius:var(--radius);
+  padding:1.4rem .8rem;text-align:center;transition:transform .25s ease,border-color .25s ease;
+}
+.team__card:hover{transform:translateY(-5px);border-color:var(--aqua)}
+.team__card img{width:80px;height:80px;border-radius:50%;margin:0 auto .9rem;border:3px solid var(--solar);object-fit:cover}
+.team__card--advisor img{border-color:var(--aqua)}
+.team__card h3{font-family:var(--f-display);font-size:1rem;margin-bottom:.25rem;line-height:1.3}
+.team__card p{font-size:.82rem;color:var(--mut-l)}
+
+.footer__sus{
+  display:grid;gap:1.6rem;background:var(--ink);border:1px solid var(--line-d);
+  border-radius:var(--radius);padding:2rem;margin-bottom:2.5rem;
+}
+.footer__sus h3{font-family:var(--f-display);font-size:1.3rem;margin-bottom:.7rem;color:var(--solar)}
+.footer__sus p{color:var(--mut-l);max-width:70ch}
+.footer__sus p strong{color:var(--txt-l)}
+
+.sdg{display:flex;flex-wrap:wrap;gap:1rem;align-content:center}
+.sdg__chip{border-radius:12px;padding:.9rem 1.2rem;font-size:.9rem;color:#fff;min-width:180px}
+.sdg__chip strong{display:block;font-family:var(--f-display);font-size:1.05rem;margin-bottom:.15rem}
+.sdg__chip--7{background:#00689D}
+.sdg__chip--13{background:#3F7E44}
+
+.footer__nav{display:flex;flex-wrap:wrap;gap:1.4rem;padding:1.4rem 0;border-block:1px solid var(--line-d);margin-bottom:1.4rem}
+.footer__nav a{color:var(--mut-l);text-decoration:none;font-size:.95rem;transition:color .2s ease}
+.footer__nav a:hover{color:var(--aqua)}
+
+.footer__bottom{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:space-between;font-size:.88rem;color:var(--mut-l)}
+.footer__bottom .mono{font-size:.78rem}
+
+/* ── Revelação por scroll ─────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+
+/* ── Responsivo (mobile-first) ────────────────────────────── */
+@media (min-width: 720px){
+  .principles{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .stats{grid-template-columns:repeat(4,1fr)}
+  .footer__sus{grid-template-columns:1.4fr 1fr}
+  .sim-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:start}
+  .acc-cards{grid-template-columns:1fr 1fr}
+  .team{gap:1.2rem}
+}
+
+@media (min-width: 900px){
+  .hero__grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:2rem}
+  .tec-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:3rem}
+  .rob-grid{grid-template-columns:minmax(280px,330px) minmax(0,1fr);gap:2.5rem}
+  .rob-sticky{position:sticky;top:calc(var(--nav-h) + 24px);align-self:start}
+  .acc-grid{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start}
+}
+
+@media (min-width: 920px){
+  .nav-toggle{display:none}
+  .menu{
+    position:static;display:flex!important;flex-direction:row;gap:.3rem;
+    background:none;border:0;padding:0;animation:none;align-items:center;
+  }
+  .menu a{padding:.5rem .85rem;font-size:.95rem}
+  .menu a.is-active{background:rgba(86,225,212,.08)}
+}
+
+/* Telas médias: aperta os links para nada ser cortado */
+@media (min-width: 920px) and (max-width: 1120px){
+  .menu a{padding:.5rem .45rem;font-size:.85rem}
+  .brand__txt{font-size:1.05rem}
+  .brand__mark{width:34px;height:34px}
+}
+
+/* ── Telas bem pequenas (≤480px) ──────────────────────────── */
+@media (max-width: 480px){
+  .hero__cta .btn{width:100%;justify-content:center}
+  .float-card{font-size:.72rem;padding:.5rem .7rem;max-width:160px}
+  .sim-readout__value{font-size:2.4rem}
+  .flow__arrow{display:none}
+  .team__card{padding:1rem .4rem}
+  .team__card img{width:64px;height:64px}
+  .team__card h3{font-size:.85rem}
+  .team__card p{font-size:.7rem}
+  .sdg__chip{min-width:0;width:100%}
+  .step{padding:1.1rem}
+}
+
+/* ── Movimento reduzido (A11y) ────────────────────────────── */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  .line > span{transform:none}
+  .marquee__track{animation:none;flex-wrap:wrap;width:auto}
+}
